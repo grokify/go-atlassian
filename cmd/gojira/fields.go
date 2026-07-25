@@ -7,7 +7,7 @@ import (
 	"os"
 	"strings"
 
-	"github.com/grokify/gojira/rest"
+	"github.com/grokify/go-atlassian/jira"
 	"github.com/spf13/cobra"
 )
 
@@ -96,7 +96,7 @@ func runFields(cmd *cobra.Command, args []string) error {
 		return showEpicLinkField(client)
 	}
 
-	var fields rest.CustomFields
+	var fields jira.CustomFields
 
 	// Get fields based on project filtering
 	if fieldsProject != "" {
@@ -149,7 +149,7 @@ func runFields(cmd *cobra.Command, args []string) error {
 	return outputFieldsTable(fields)
 }
 
-func showEpicLinkField(client *rest.Client) error {
+func showEpicLinkField(client *jira.Client) error {
 	field, err := client.CustomFieldAPI.GetCustomFieldEpicLink()
 	if err != nil {
 		return fmt.Errorf("failed to get Epic Link field: %w", err)
@@ -160,7 +160,7 @@ func showEpicLinkField(client *rest.Client) error {
 		return nil
 	}
 
-	fields := rest.CustomFields{field}
+	fields := jira.CustomFields{field}
 
 	if fieldsOutputJSON {
 		return outputFieldsJSON(fields)
@@ -169,10 +169,10 @@ func showEpicLinkField(client *rest.Client) error {
 	return outputFieldsTable(fields)
 }
 
-func applyFieldFilters(fields rest.CustomFields) rest.CustomFields {
+func applyFieldFilters(fields jira.CustomFields) jira.CustomFields {
 	// Filter by custom only
 	if fieldsCustomOnly {
-		var filtered rest.CustomFields
+		var filtered jira.CustomFields
 		for _, f := range fields {
 			if f.Custom {
 				filtered = append(filtered, f)
@@ -195,7 +195,7 @@ func applyFieldFilters(fields rest.CustomFields) rest.CustomFields {
 
 	// Filter by partial name match
 	if fieldsFilterName != "" {
-		var filtered rest.CustomFields
+		var filtered jira.CustomFields
 		searchLower := strings.ToLower(fieldsFilterName)
 		for _, f := range fields {
 			if strings.Contains(strings.ToLower(f.Name), searchLower) {
@@ -219,7 +219,7 @@ func parseCommaSeparated(s string) []string {
 	return result
 }
 
-func outputFieldsJSON(fields rest.CustomFields) error {
+func outputFieldsJSON(fields jira.CustomFields) error {
 	data, err := json.MarshalIndent(fields, "", "  ")
 	if err != nil {
 		return fmt.Errorf("failed to marshal JSON: %w", err)
@@ -228,15 +228,15 @@ func outputFieldsJSON(fields rest.CustomFields) error {
 	return nil
 }
 
-func outputFieldsTable(fields rest.CustomFields) error {
+func outputFieldsTable(fields jira.CustomFields) error {
 	return fields.WriteTable(os.Stdout)
 }
 
 // filterDuplicateNames returns only fields whose names appear more than once.
-func filterDuplicateNames(fields rest.CustomFields) rest.CustomFields {
+func filterDuplicateNames(fields jira.CustomFields) jira.CustomFields {
 	dupeNames := fields.DuplicateNames()
 	if len(dupeNames) == 0 {
-		return rest.CustomFields{}
+		return jira.CustomFields{}
 	}
 	return fields.FilterByNames(dupeNames...)
 }

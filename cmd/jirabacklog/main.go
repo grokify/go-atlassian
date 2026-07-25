@@ -6,8 +6,8 @@ import (
 	"log"
 	"time"
 
-	"github.com/grokify/gojira/cmd"
-	"github.com/grokify/gojira/rest"
+	"github.com/grokify/go-atlassian/cmd"
+	"github.com/grokify/go-atlassian/jira"
 	"github.com/grokify/mogo/errors/errorsutil"
 	"github.com/grokify/mogo/fmt/fmtutil"
 	"github.com/grokify/mogo/log/logutil"
@@ -26,10 +26,10 @@ func main() {
 	jrClient, err := opts.Client()
 	logutil.FatalErr(errorsutil.Wrap(err, "Client"))
 
-	// cfg := gojira.NewConfigDefault()
+	// cfg := atlassian.NewConfigDefault()
 	// cfg.BaseURL = jrClient.Config.ServerURL
 
-	svc := rest.NewBacklogService(jrClient)
+	svc := jira.NewBacklogService(jrClient)
 
 	is, _, err := svc.GetBacklogIssuesSetAll(context.Background(), opts.BoardID,
 		// "type in (Bug,Story) AND status in (Ready,\"Engineering Design\",\"Ready for Grooming\")",

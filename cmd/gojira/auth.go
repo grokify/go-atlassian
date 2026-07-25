@@ -6,7 +6,7 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/grokify/gojira/rest"
+	"github.com/grokify/go-atlassian/jira"
 )
 
 const (
@@ -29,11 +29,11 @@ type AuthOptions struct {
 // 1. CLI flags (credsFile, account)
 // 2. Environment variables (JIRA_URL, JIRA_USER, JIRA_TOKEN)
 // 3. Default goauth file (~/.config/goauth/credentials.json) with interactive selection
-func NewClientFromOptions(opts *AuthOptions) (*rest.Client, error) {
+func NewClientFromOptions(opts *AuthOptions) (*jira.Client, error) {
 	// 1. Check CLI flags for explicit credentials file
 	if opts != nil && strings.TrimSpace(opts.CredsFile) != "" {
 		credsFile := expandPath(opts.CredsFile)
-		return rest.NewClientGoauthBasicAuthFile(credsFile, opts.Account, false)
+		return jira.NewClientGoauthBasicAuthFile(credsFile, opts.Account, false)
 	}
 
 	// 2. Check environment variables
@@ -42,7 +42,7 @@ func NewClientFromOptions(opts *AuthOptions) (*rest.Client, error) {
 	token := strings.TrimSpace(os.Getenv(EnvJiraToken))
 
 	if url != "" && user != "" && token != "" {
-		return rest.NewClientFromBasicAuth(url, user, token, false)
+		return jira.NewClientFromBasicAuth(url, user, token, false)
 	}
 
 	// 3. Check if default goauth file exists
@@ -50,18 +50,18 @@ func NewClientFromOptions(opts *AuthOptions) (*rest.Client, error) {
 	if _, err := os.Stat(defaultPath); err == nil {
 		// File exists, try to use it
 		if opts != nil && opts.Account != "" {
-			return rest.NewClientGoauthBasicAuthFile(defaultPath, opts.Account, false)
+			return jira.NewClientGoauthBasicAuthFile(defaultPath, opts.Account, false)
 		}
 		// Fall through to interactive CLI selection
 	}
 
 	// 4. Fall back to goauth CLI (interactive selection)
-	return rest.NewClientFromGoauthCLI(true, false)
+	return jira.NewClientFromGoauthCLI(true, false)
 }
 
 // NewClientFromEnv creates a Jira client from environment variables only.
 // Returns an error if required environment variables are not set.
-func NewClientFromEnv() (*rest.Client, error) {
+func NewClientFromEnv() (*jira.Client, error) {
 	url := strings.TrimSpace(os.Getenv(EnvJiraURL))
 	user := strings.TrimSpace(os.Getenv(EnvJiraUser))
 	token := strings.TrimSpace(os.Getenv(EnvJiraToken))
@@ -70,7 +70,7 @@ func NewClientFromEnv() (*rest.Client, error) {
 		return nil, errors.New("environment variables JIRA_URL, JIRA_USER, and JIRA_TOKEN must all be set")
 	}
 
-	return rest.NewClientFromBasicAuth(url, user, token, false)
+	return jira.NewClientFromBasicAuth(url, user, token, false)
 }
 
 // expandPath expands ~ to the user's home directory.

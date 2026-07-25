@@ -11,6 +11,8 @@ var (
 	flagJSON      bool
 	flagTable     bool
 	flagTOON      bool
+	flagCSV       bool
+	flagMarkdown  bool
 	flagCredsFile string
 	flagAccount   string
 	flagQuiet     bool
@@ -57,6 +59,8 @@ func init() {
 	rootCmd.PersistentFlags().BoolVarP(&flagJSON, "json", "j", false, "Output as JSON (default)")
 	rootCmd.PersistentFlags().BoolVarP(&flagTable, "table", "t", false, "Output as human-readable table")
 	rootCmd.PersistentFlags().BoolVar(&flagTOON, "toon", false, "Output as TOON (Token-Optimized Object Notation)")
+	rootCmd.PersistentFlags().BoolVar(&flagCSV, "csv", false, "Output as CSV")
+	rootCmd.PersistentFlags().BoolVar(&flagMarkdown, "markdown", false, "Output as Markdown table")
 
 	// Authentication flags
 	rootCmd.PersistentFlags().StringVar(&flagCredsFile, "creds-file", "", "Path to goauth credentials file")
@@ -66,7 +70,7 @@ func init() {
 	rootCmd.PersistentFlags().BoolVarP(&flagQuiet, "quiet", "q", false, "Suppress non-essential output")
 
 	// Mark output format flags as mutually exclusive
-	rootCmd.MarkFlagsMutuallyExclusive("json", "table", "toon")
+	rootCmd.MarkFlagsMutuallyExclusive("json", "table", "toon", "csv", "markdown")
 }
 
 // getOutputFormat returns the output format based on flags.
@@ -77,6 +81,12 @@ func getOutputFormat() OutputFormat {
 	}
 	if flagTOON {
 		return OutputTOON
+	}
+	if flagCSV {
+		return OutputCSV
+	}
+	if flagMarkdown {
+		return OutputMarkdown
 	}
 	return OutputJSON
 }

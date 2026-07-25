@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/grokify/gojira/rest"
+	"github.com/grokify/go-atlassian/jira"
 	"github.com/spf13/cobra"
 )
 
@@ -55,21 +55,21 @@ func runGet(cmd *cobra.Command, args []string) error {
 	}
 
 	// Set up query options
-	opts := &rest.GetQueryOptions{
+	opts := &jira.GetQueryOptions{
 		ExpandChangelog: flagGetExpand,
 	}
 
 	ctx := context.Background()
 
 	// Fetch issues
-	var issues rest.Issues
+	var issues jira.Issues
 	if len(args) == 1 {
 		// Single issue
 		issue, err := client.IssueAPI.Issue(ctx, args[0], opts)
 		if err != nil {
 			return fmt.Errorf("failed to get issue %s: %w", args[0], err)
 		}
-		issues = rest.Issues{*issue}
+		issues = jira.Issues{*issue}
 	} else {
 		// Multiple issues
 		issues, err = client.IssueAPI.Issues(ctx, args, opts)

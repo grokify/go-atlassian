@@ -3,9 +3,9 @@ package xml
 import (
 	"strings"
 
+	"github.com/grokify/go-atlassian/jira"
 	"github.com/grokify/gocharts/v2/data/histogram"
 	"github.com/grokify/gocharts/v2/data/table"
-	"github.com/grokify/gojira"
 	"github.com/grokify/mogo/type/stringsutil"
 )
 
@@ -41,22 +41,22 @@ func (ii Issues) Keys() []string {
 	return stringsutil.SliceCondenseSpace(keys, true, true)
 }
 
-func (ii Issues) Stats(workingHoursPerDay, workingDaysPerWeek float32) gojira.IssuesStats {
+func (ii Issues) Stats(workingHoursPerDay, workingDaysPerWeek float32) jira.IssuesStats {
 	if workingHoursPerDay == 0 {
-		workingHoursPerDay = gojira.WorkingHoursPerDayDefault
+		workingHoursPerDay = jira.WorkingHoursPerDayDefault
 	}
 	if workingDaysPerWeek == 0 {
-		workingDaysPerWeek = gojira.WorkingDaysPerWeekDefault
+		workingDaysPerWeek = jira.WorkingDaysPerWeekDefault
 	}
 	workingHoursPerDay64 := float64(workingHoursPerDay)
-	stats := gojira.IssuesStats{
+	stats := jira.IssuesStats{
 		WorkingHoursPerDay:     workingHoursPerDay,
 		WorkingDaysPerWeek:     workingDaysPerWeek,
 		ItemCount:              len(ii),
 		ItemCountByStatus:      map[string]int{},
 		ItemCountByType:        map[string]int{},
-		EstimateStatsByType:    map[string]gojira.EstimateStats{},
-		ClosedEstimateVsActual: gojira.EstimateVsActual{},
+		EstimateStatsByType:    map[string]jira.EstimateStats{},
+		ClosedEstimateVsActual: jira.EstimateVsActual{},
 	}
 	for _, it := range ii {
 		stats.TimeOriginalEstimate += it.TimeOriginalEstimate.Duration()
@@ -65,7 +65,7 @@ func (ii Issues) Stats(workingHoursPerDay, workingDaysPerWeek float32) gojira.Is
 		stats.ItemCountByType[it.Type.DisplayName]++
 		esStats, ok := stats.EstimateStatsByType[it.Type.DisplayName]
 		if !ok {
-			esStats = gojira.EstimateStats{}
+			esStats = jira.EstimateStats{}
 		}
 		if it.TimeOriginalEstimate.Seconds > 0 {
 			esStats.WithEstimate++
@@ -73,7 +73,7 @@ func (ii Issues) Stats(workingHoursPerDay, workingDaysPerWeek float32) gojira.Is
 			esStats.WithoutEstimate++
 		}
 		stats.EstimateStatsByType[it.Type.DisplayName] = esStats
-		if it.Status.DisplayName == gojira.StatusDone {
+		if it.Status.DisplayName == jira.StatusDone {
 			stats.ClosedEstimateVsActual.ClosedCount++
 			if it.TimeOriginalEstimate.Seconds > 0 {
 				stats.ClosedEstimateVsActual.ClosedCountWithEstimate++

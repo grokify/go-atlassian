@@ -1,8 +1,8 @@
 site_name: GoJira
 site_description: Go SDK and CLI for Jira
-site_url: https://grokify.github.io/gojira/
-repo_url: https://github.com/grokify/gojira
-repo_name: grokify/gojira
+site_url: https://grokify.github.io/go-atlassian/
+repo_url: https://github.com/grokify/go-atlassian
+repo_name: grokify/go-atlassian
 
 theme:
   name: material
@@ -76,4 +76,4 @@ nav:
 extra:
   social:
     - icon: fontawesome/brands/github
-      link: https://github.com/grokify/gojira
+      link: https://github.com/grokify/go-atlassian

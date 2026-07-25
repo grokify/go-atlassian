@@ -7,7 +7,7 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/grokify/gojira/rest"
+	"github.com/grokify/go-atlassian/jira"
 	"github.com/spf13/cobra"
 )
 
@@ -62,13 +62,13 @@ func runExport(cmd *cobra.Command, args []string) error {
 		return fmt.Errorf("at least one output format required: --json or --xlsx")
 	}
 
-	var issuesSet *rest.IssuesSet
+	var issuesSet *jira.IssuesSet
 	var err error
 
 	// Get issues from source
 	if exportFromJSON != "" {
 		// Read from existing JSON file
-		issuesSet, err = rest.IssuesSetReadFileJSON(exportFromJSON)
+		issuesSet, err = jira.IssuesSetReadFileJSON(exportFromJSON)
 		if err != nil {
 			return fmt.Errorf("failed to read JSON file: %w", err)
 		}
@@ -118,7 +118,7 @@ func runExport(cmd *cobra.Command, args []string) error {
 	return nil
 }
 
-func fetchIssuesForExport() (*rest.IssuesSet, error) {
+func fetchIssuesForExport() (*jira.IssuesSet, error) {
 	if exportJQL == "" && exportKeys == "" {
 		return nil, fmt.Errorf("query required: use --jql or --keys")
 	}
@@ -174,7 +174,7 @@ func parseKeys(keysStr string) []string {
 	return keys
 }
 
-func writeJSONExport(issuesSet *rest.IssuesSet, outputPath string) error {
+func writeJSONExport(issuesSet *jira.IssuesSet, outputPath string) error {
 	// Ensure directory exists
 	dir := filepath.Dir(outputPath)
 	if dir != "" && dir != "." {
@@ -200,7 +200,7 @@ func writeJSONExport(issuesSet *rest.IssuesSet, outputPath string) error {
 	return nil
 }
 
-func writeXLSXExport(issuesSet *rest.IssuesSet, outputPath string) error {
+func writeXLSXExport(issuesSet *jira.IssuesSet, outputPath string) error {
 	// Ensure directory exists
 	dir := filepath.Dir(outputPath)
 	if dir != "" && dir != "." {

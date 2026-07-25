@@ -6,13 +6,13 @@ import (
 	"os"
 	"strings"
 
-	jira "github.com/andygrunwald/go-jira"
-	"github.com/grokify/gojira/rest"
+	gojira "github.com/andygrunwald/go-jira"
+	"github.com/grokify/go-atlassian/jira"
 	"gopkg.in/yaml.v3"
 )
 
 // CreateIssueFromFile reads a YAML file and creates a Jira issue.
-func CreateIssueFromFile(ctx context.Context, client *rest.Client, filename string) (*IssueResult, error) {
+func CreateIssueFromFile(ctx context.Context, client *jira.Client, filename string) (*IssueResult, error) {
 	data, err := os.ReadFile(filename)
 	if err != nil {
 		return nil, fmt.Errorf("read file: %w", err)
@@ -22,7 +22,7 @@ func CreateIssueFromFile(ctx context.Context, client *rest.Client, filename stri
 }
 
 // CreateIssueFromYAML parses YAML content and creates a Jira issue.
-func CreateIssueFromYAML(ctx context.Context, client *rest.Client, data []byte) (*IssueResult, error) {
+func CreateIssueFromYAML(ctx context.Context, client *jira.Client, data []byte) (*IssueResult, error) {
 	input, err := ParseIssueYAML(data)
 	if err != nil {
 		return nil, fmt.Errorf("parse YAML: %w", err)
@@ -51,20 +51,20 @@ func ParseIssueYAML(data []byte) (*IssueInput, error) {
 }
 
 // CreateIssue creates a Jira issue from IssueInput.
-func CreateIssue(ctx context.Context, client *rest.Client, input *IssueInput) (*IssueResult, error) {
+func CreateIssue(ctx context.Context, client *jira.Client, input *IssueInput) (*IssueResult, error) {
 	if err := validateInput(input); err != nil {
 		return nil, err
 	}
 
 	// Build the Jira issue
-	issue := &jira.Issue{
-		Fields: &jira.IssueFields{
+	issue := &gojira.Issue{
+		Fields: &gojira.IssueFields{
 			Summary:     input.Summary,
 			Description: input.Description,
-			Project: jira.Project{
+			Project: gojira.Project{
 				Key: input.Project,
 			},
-			Type: jira.IssueType{
+			Type: gojira.IssueType{
 				Name: input.Type,
 			},
 			Labels: input.Labels,
@@ -73,28 +73,28 @@ func CreateIssue(ctx context.Context, client *rest.Client, input *IssueInput) (*
 
 	// Set parent if provided (for subtasks or stories under epics)
 	if input.Parent != "" {
-		issue.Fields.Parent = &jira.Parent{
+		issue.Fields.Parent = &gojira.Parent{
 			Key: input.Parent,
 		}
 	}
 
 	// Set priority if provided
 	if input.Priority != "" {
-		issue.Fields.Priority = &jira.Priority{
+		issue.Fields.Priority = &gojira.Priority{
 			Name: input.Priority,
 		}
 	}
 
 	// Set assignee if provided
 	if input.Assignee != "" {
-		issue.Fields.Assignee = &jira.User{
+		issue.Fields.Assignee = &gojira.User{
 			Name: input.Assignee,
 		}
 	}
 
 	// Set reporter if provided
 	if input.Reporter != "" {
-		issue.Fields.Reporter = &jira.User{
+		issue.Fields.Reporter = &gojira.User{
 			Name: input.Reporter,
 		}
 	}
@@ -102,7 +102,7 @@ func CreateIssue(ctx context.Context, client *rest.Client, input *IssueInput) (*
 	// Set components if provided
 	if len(input.Components) > 0 {
 		for _, c := range input.Components {
-			issue.Fields.Components = append(issue.Fields.Components, &jira.Component{
+			issue.Fields.Components = append(issue.Fields.Components, &gojira.Component{
 				Name: c,
 			})
 		}
@@ -111,7 +111,7 @@ func CreateIssue(ctx context.Context, client *rest.Client, input *IssueInput) (*
 	// Set fix versions if provided
 	if len(input.FixVersions) > 0 {
 		for _, v := range input.FixVersions {
-			issue.Fields.FixVersions = append(issue.Fields.FixVersions, &jira.FixVersion{
+			issue.Fields.FixVersions = append(issue.Fields.FixVersions, &gojira.FixVersion{
 				Name: v,
 			})
 		}
@@ -197,4 +197,139 @@ type DryRunResult struct {
 	Priority     string         `json:"priority,omitempty"`
 	Assignee     string         `json:"assignee,omitempty"`
 	CustomFields map[string]any `json:"custom_fields,omitempty"`
+}
+
+// ValidationResult contains the result of validating input against createmeta.
+type ValidationResult struct {
+	Valid             bool     `json:"valid"`
+	MissingRequired   []string `json:"missing_required,omitempty"`
+	UnknownFields     []string `json:"unknown_fields,omitempty"`
+	AvailableFields   []string `json:"available_fields,omitempty"`
+	IssueTypeID       string   `json:"issue_type_id,omitempty"`
+	RequiredFieldsMsg string   `json:"required_fields_message,omitempty"`
+}
+
+// ValidateAgainstMeta validates IssueInput against the Jira createmeta API.
+// It checks that all required fields are provided and that field names are valid.
+func ValidateAgainstMeta(ctx context.Context, client *jira.Client, input *IssueInput) (*ValidationResult, error) {
+	// Basic validation first
+	if err := validateInput(input); err != nil {
+		return nil, err
+	}
+
+	result := &ValidationResult{
+		Valid: true,
+	}
+
+	// Get issue types for the project
+	issueTypes, err := client.CreateMetaAPI.GetIssueTypes(ctx, input.Project)
+	if err != nil {
+		return nil, fmt.Errorf("failed to get issue types for project %q: %w", input.Project, err)
+	}
+
+	// Find the matching issue type
+	var issueTypeID string
+	for _, it := range issueTypes {
+		if strings.EqualFold(it.Name, input.Type) {
+			issueTypeID = it.ID
+			break
+		}
+	}
+
+	if issueTypeID == "" {
+		availableTypes := make([]string, len(issueTypes))
+		for i, it := range issueTypes {
+			availableTypes[i] = it.Name
+		}
+		return nil, fmt.Errorf("issue type %q not found in project %q; available: %s",
+			input.Type, input.Project, strings.Join(availableTypes, ", "))
+	}
+
+	result.IssueTypeID = issueTypeID
+
+	// Get fields for this project/issue type combination
+	fields, err := client.CreateMetaAPI.GetFields(ctx, input.Project, issueTypeID)
+	if err != nil {
+		return nil, fmt.Errorf("failed to get fields for issue type: %w", err)
+	}
+
+	// Build map of available fields
+	availableByKey := fields.ByKey()
+	for _, f := range fields {
+		result.AvailableFields = append(result.AvailableFields, f.Key)
+	}
+
+	// Check required fields
+	providedFields := getProvidedFieldKeys(input)
+
+	for _, f := range fields {
+		if f.Required && !f.HasDefaultValue {
+			if _, provided := providedFields[f.Key]; !provided {
+				result.MissingRequired = append(result.MissingRequired, fmt.Sprintf("%s (%s)", f.Key, f.Name))
+				result.Valid = false
+			}
+		}
+	}
+
+	// Check for unknown custom fields
+	customFields := input.GetCustomFields()
+	for key := range customFields {
+		if _, exists := availableByKey[key]; !exists {
+			result.UnknownFields = append(result.UnknownFields, key)
+			result.Valid = false
+		}
+	}
+
+	// Build summary message
+	if len(result.MissingRequired) > 0 {
+		result.RequiredFieldsMsg = fmt.Sprintf("Missing required fields: %s", strings.Join(result.MissingRequired, ", "))
+	}
+
+	return result, nil
+}
+
+// getProvidedFieldKeys returns a set of field keys that are provided in the input.
+func getProvidedFieldKeys(input *IssueInput) map[string]bool {
+	provided := make(map[string]bool)
+
+	// Standard fields
+	if input.Summary != "" {
+		provided["summary"] = true
+	}
+	if input.Description != "" {
+		provided["description"] = true
+	}
+	if input.Project != "" {
+		provided["project"] = true
+	}
+	if input.Parent != "" {
+		provided["parent"] = true
+	}
+	if len(input.Labels) > 0 {
+		provided["labels"] = true
+	}
+	if input.Priority != "" {
+		provided["priority"] = true
+	}
+	if input.Assignee != "" {
+		provided["assignee"] = true
+	}
+	if input.Reporter != "" {
+		provided["reporter"] = true
+	}
+	if len(input.Components) > 0 {
+		provided["components"] = true
+	}
+	if len(input.FixVersions) > 0 {
+		provided["fixVersions"] = true
+	}
+	// issuetype is always provided via input.Type
+	provided["issuetype"] = true
+
+	// Custom fields
+	for key := range input.GetCustomFields() {
+		provided[key] = true
+	}
+
+	return provided
 }

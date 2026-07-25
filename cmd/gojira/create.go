@@ -5,16 +5,17 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/grokify/gojira/core"
+	"github.com/grokify/go-atlassian/core"
 	"github.com/spf13/cobra"
 )
 
 var (
-	createFile    string
-	createDryRun  bool
-	createProject string
-	createParent  string
-	createType    string
+	createFile     string
+	createDryRun   bool
+	createValidate bool
+	createProject  string
+	createParent   string
+	createType     string
 )
 
 var createCmd = &cobra.Command{
@@ -46,8 +47,11 @@ Examples:
   # Create issue from file
   gojira create -f story.yaml
 
-  # Dry run to preview
+  # Dry run to preview (local validation only)
   gojira create -f story.yaml --dry-run
+
+  # Validate against Jira createmeta API
+  gojira create -f story.yaml --validate
 
   # Override project
   gojira create -f story.yaml --project PROJ
@@ -59,7 +63,8 @@ Examples:
 
 func init() {
 	createCmd.Flags().StringVarP(&createFile, "file", "f", "", "YAML file containing issue data (required)")
-	createCmd.Flags().BoolVar(&createDryRun, "dry-run", false, "Validate and show what would be created without actually creating")
+	createCmd.Flags().BoolVar(&createDryRun, "dry-run", false, "Preview what would be created (local validation only)")
+	createCmd.Flags().BoolVar(&createValidate, "validate", false, "Validate YAML against Jira createmeta API before creating")
 	createCmd.Flags().StringVar(&createProject, "project", "", "Override project key from file")
 	createCmd.Flags().StringVar(&createParent, "parent", "", "Override parent issue key from file")
 	createCmd.Flags().StringVar(&createType, "type", "", "Override issue type from file")
@@ -94,7 +99,7 @@ func runCreate(cmd *cobra.Command, _ []string) error {
 		input.Type = createType
 	}
 
-	// Dry run mode
+	// Dry run mode (local validation only)
 	if createDryRun {
 		result, err := core.DryRunCreate(input)
 		if err != nil {
@@ -103,13 +108,38 @@ func runCreate(cmd *cobra.Command, _ []string) error {
 		return outputResult(cmd, result)
 	}
 
-	// Create the issue
+	// Create the client for API calls
 	client, err := NewClientFromOptions(getAuthOptions())
 	if err != nil {
 		return fmt.Errorf("create client: %w", err)
 	}
 
-	result, err := core.CreateIssue(context.Background(), client, input)
+	ctx := context.Background()
+
+	// Validate against createmeta API
+	if createValidate {
+		validationResult, err := core.ValidateAgainstMeta(ctx, client, input)
+		if err != nil {
+			return fmt.Errorf("validation failed: %w", err)
+		}
+
+		if !validationResult.Valid {
+			// Output validation errors
+			if err := outputResult(cmd, validationResult); err != nil {
+				return err
+			}
+			return fmt.Errorf("validation failed: %s", validationResult.RequiredFieldsMsg)
+		}
+
+		// Validation passed
+		if !flagQuiet {
+			fmt.Println("Validation passed")
+		}
+		return outputResult(cmd, validationResult)
+	}
+
+	// Create the issue
+	result, err := core.CreateIssue(ctx, client, input)
 	if err != nil {
 		return err
 	}

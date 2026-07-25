@@ -7,7 +7,7 @@ import (
 	"os"
 	"strings"
 
-	"github.com/grokify/gojira/rest"
+	"github.com/grokify/go-atlassian/jira"
 	"github.com/spf13/cobra"
 )
 
@@ -107,14 +107,14 @@ func runPatch(cmd *cobra.Command, args []string) error {
 			return fmt.Errorf("failed to fetch updated issue: %w", err)
 		}
 		cfg := NewOutputConfig(getOutputFormat())
-		return WriteIssues(rest.Issues{*issue}, cfg)
+		return WriteIssues(jira.Issues{*issue}, cfg)
 	}
 
 	return nil
 }
 
-func buildPatchRequestBody() (rest.IssuePatchRequestBody, error) {
-	var reqBody rest.IssuePatchRequestBody
+func buildPatchRequestBody() (jira.IssuePatchRequestBody, error) {
+	var reqBody jira.IssuePatchRequestBody
 
 	// If raw JSON provided, use it directly
 	if patchJSONBody != "" {
@@ -126,7 +126,7 @@ func buildPatchRequestBody() (rest.IssuePatchRequestBody, error) {
 
 	// Build from flags
 	if len(patchSetFlags) > 0 {
-		reqBody.Fields = make(map[string]rest.IssuePatchRequestBodyField)
+		reqBody.Fields = make(map[string]jira.IssuePatchRequestBodyField)
 		for _, setFlag := range patchSetFlags {
 			parts := strings.SplitN(setFlag, "=", 2)
 			if len(parts) != 2 {
@@ -135,7 +135,7 @@ func buildPatchRequestBody() (rest.IssuePatchRequestBody, error) {
 			fieldName := strings.TrimSpace(parts[0])
 			fieldValue := strings.TrimSpace(parts[1])
 
-			reqBody.Fields[fieldName] = rest.IssuePatchRequestBodyField{
+			reqBody.Fields[fieldName] = jira.IssuePatchRequestBodyField{
 				Value: fieldValue,
 			}
 		}
@@ -144,15 +144,15 @@ func buildPatchRequestBody() (rest.IssuePatchRequestBody, error) {
 	// Handle label updates
 	if len(patchAddLabels) > 0 || len(patchRemoveLabels) > 0 {
 		if reqBody.Update == nil {
-			reqBody.Update = &rest.IssuePatchRequestBodyUpdate{}
+			reqBody.Update = &jira.IssuePatchRequestBodyUpdate{}
 		}
 		for _, label := range patchAddLabels {
-			reqBody.Update.Labels = append(reqBody.Update.Labels, rest.IssuePatchRequestBodyUpdateLabel{
+			reqBody.Update.Labels = append(reqBody.Update.Labels, jira.IssuePatchRequestBodyUpdateLabel{
 				Add: &label,
 			})
 		}
 		for _, label := range patchRemoveLabels {
-			reqBody.Update.Labels = append(reqBody.Update.Labels, rest.IssuePatchRequestBodyUpdateLabel{
+			reqBody.Update.Labels = append(reqBody.Update.Labels, jira.IssuePatchRequestBodyUpdateLabel{
 				Remove: &label,
 			})
 		}

@@ -7,8 +7,8 @@ import (
 	"os"
 	"strings"
 
-	jira "github.com/andygrunwald/go-jira"
-	"github.com/grokify/gojira/rest"
+	gojira "github.com/andygrunwald/go-jira"
+	"github.com/grokify/go-atlassian/jira"
 	"github.com/olekukonko/tablewriter"
 	"github.com/spf13/cobra"
 )
@@ -20,6 +20,8 @@ const (
 	OutputJSON OutputFormat = iota
 	OutputTable
 	OutputTOON
+	OutputCSV
+	OutputMarkdown
 )
 
 // OutputConfig holds output configuration.
@@ -37,7 +39,7 @@ func NewOutputConfig(format OutputFormat) *OutputConfig {
 }
 
 // WriteIssues writes issues in the specified format.
-func WriteIssues(issues rest.Issues, cfg *OutputConfig) error {
+func WriteIssues(issues jira.Issues, cfg *OutputConfig) error {
 	if cfg == nil {
 		cfg = NewOutputConfig(OutputJSON)
 	}
@@ -52,43 +54,47 @@ func WriteIssues(issues rest.Issues, cfg *OutputConfig) error {
 		return writeIssuesTable(issues, cfg.Writer)
 	case OutputTOON:
 		return writeIssuesToon(issues, cfg.Writer)
+	case OutputCSV:
+		return writeIssuesCSV(issues, cfg.Writer)
+	case OutputMarkdown:
+		return writeIssuesMarkdown(issues, cfg.Writer)
 	default:
 		return writeIssuesJSON(issues, cfg.Writer)
 	}
 }
 
 // WriteIssue writes a single issue in the specified format.
-func WriteIssue(issue *jira.Issue, cfg *OutputConfig) error {
+func WriteIssue(issue *gojira.Issue, cfg *OutputConfig) error {
 	if issue == nil {
 		return nil
 	}
-	issues := rest.Issues{*issue}
+	issues := jira.Issues{*issue}
 	return WriteIssues(issues, cfg)
 }
 
 // writeIssuesJSON outputs issues as JSON using the shared IssueOutput type.
-func writeIssuesJSON(issues rest.Issues, w io.Writer) error {
-	outputs := rest.ToIssueOutputs(issues)
+func writeIssuesJSON(issues jira.Issues, w io.Writer) error {
+	outputs := jira.ToIssueOutputs(issues)
 	enc := json.NewEncoder(w)
 	enc.SetIndent("", "  ")
 	return enc.Encode(outputs)
 }
 
 // WriteIssuesRaw outputs the full API JSON for issues (all fields from Jira API).
-func WriteIssuesRaw(issues rest.Issues) error {
+func WriteIssuesRaw(issues jira.Issues) error {
 	enc := json.NewEncoder(os.Stdout)
 	enc.SetIndent("", "  ")
 	return enc.Encode(issues)
 }
 
 // writeIssuesTable outputs issues as an ASCII table.
-func writeIssuesTable(issues rest.Issues, w io.Writer) error {
+func writeIssuesTable(issues jira.Issues, w io.Writer) error {
 	tw := tablewriter.NewWriter(w)
 	tw.Header([]string{"Key", "Type", "Status", "Assignee", "Summary"})
 
 	var rows [][]string
 	for _, iss := range issues {
-		im := rest.NewIssueMore(&iss)
+		im := jira.NewIssueMore(&iss)
 		summary := truncateString(im.Summary(), 50)
 		rows = append(rows, []string{
 			im.Key(),
@@ -108,9 +114,9 @@ func writeIssuesTable(issues rest.Issues, w io.Writer) error {
 // writeIssuesToon outputs issues in TOON (Token-Optimized Object Notation) format.
 // TOON is a compact key-value format designed for minimal token usage with LLMs.
 // Format: K:KEY|T:Type|S:Status|A:Assignee|Su:Summary
-func writeIssuesToon(issues rest.Issues, w io.Writer) error {
+func writeIssuesToon(issues jira.Issues, w io.Writer) error {
 	for _, iss := range issues {
-		im := rest.NewIssueMore(&iss)
+		im := jira.NewIssueMore(&iss)
 		line := formatTOON(im)
 		if _, err := fmt.Fprintln(w, line); err != nil {
 			return err
@@ -120,7 +126,7 @@ func writeIssuesToon(issues rest.Issues, w io.Writer) error {
 }
 
 // formatTOON formats a single issue in TOON format.
-func formatTOON(im rest.IssueMore) string {
+func formatTOON(im jira.IssueMore) string {
 	parts := []string{
 		"K:" + im.Key(),
 		"T:" + im.Type(),
@@ -164,4 +170,56 @@ func outputResult(_ *cobra.Command, result any) error {
 	enc := json.NewEncoder(os.Stdout)
 	enc.SetIndent("", "  ")
 	return enc.Encode(result)
+}
+
+// writeIssuesCSV outputs issues as CSV.
+func writeIssuesCSV(issues jira.Issues, w io.Writer) error {
+	// Write header
+	if _, err := fmt.Fprintln(w, "Key,Type,Status,Assignee,Summary"); err != nil {
+		return err
+	}
+
+	for _, iss := range issues {
+		im := jira.NewIssueMore(&iss)
+		// Escape double quotes in summary and wrap in quotes
+		summary := strings.ReplaceAll(im.Summary(), "\"", "\"\"")
+		line := fmt.Sprintf("%s,%s,%s,%s,\"%s\"",
+			im.Key(),
+			im.Type(),
+			im.Status(),
+			im.AssigneeName(),
+			summary)
+		if _, err := fmt.Fprintln(w, line); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+// writeIssuesMarkdown outputs issues as a Markdown table.
+func writeIssuesMarkdown(issues jira.Issues, w io.Writer) error {
+	// Write header
+	if _, err := fmt.Fprintln(w, "| Key | Type | Status | Assignee | Summary |"); err != nil {
+		return err
+	}
+	if _, err := fmt.Fprintln(w, "|-----|------|--------|----------|---------|"); err != nil {
+		return err
+	}
+
+	for _, iss := range issues {
+		im := jira.NewIssueMore(&iss)
+		// Escape pipes in summary
+		summary := strings.ReplaceAll(im.Summary(), "|", "\\|")
+		summary = truncateString(summary, 50)
+		line := fmt.Sprintf("| %s | %s | %s | %s | %s |",
+			im.Key(),
+			im.Type(),
+			im.Status(),
+			im.AssigneeName(),
+			summary)
+		if _, err := fmt.Fprintln(w, line); err != nil {
+			return err
+		}
+	}
+	return nil
 }

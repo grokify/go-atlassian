@@ -4,8 +4,8 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/grokify/gojira/cmd"
-	"github.com/grokify/gojira/rest"
+	"github.com/grokify/go-atlassian/cmd"
+	"github.com/grokify/go-atlassian/jira"
 	"github.com/grokify/mogo/errors/errorsutil"
 	"github.com/grokify/mogo/fmt/fmtutil"
 	"github.com/grokify/mogo/log/logutil"
@@ -25,7 +25,7 @@ func main() {
 	iss, err := jrClient.IssueAPI.Issue(context.Background(), opts.IssueKey, nil)
 	logutil.FatalErr(err)
 
-	im := rest.NewIssueMore(iss)
+	im := jira.NewIssueMore(iss)
 
 	fmtutil.MustPrintJSON(im.Meta("", []string{}))
 	fmtutil.MustPrintJSON(im.Meta(jrClient.Config.ServerURL, []string{}))

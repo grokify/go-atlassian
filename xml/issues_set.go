@@ -5,10 +5,10 @@ import (
 	"strconv"
 	"strings"
 
-	jira "github.com/andygrunwald/go-jira"
+	gojira "github.com/andygrunwald/go-jira"
+	"github.com/grokify/go-atlassian/jira"
 	"github.com/grokify/gocharts/v2/data/histogram"
 	"github.com/grokify/gocharts/v2/data/table"
-	"github.com/grokify/gojira"
 	"github.com/grokify/mogo/net/urlutil"
 	"github.com/grokify/mogo/strconv/strconvutil"
 	"github.com/grokify/mogo/text/markdown"
@@ -16,20 +16,20 @@ import (
 )
 
 type IssuesSet struct {
-	Config    *gojira.Config
+	Config    *jira.Config
 	IssuesMap map[string]Issue
 }
 
-func NewIssuesSet(cfg *gojira.Config) IssuesSet {
+func NewIssuesSet(cfg *jira.Config) IssuesSet {
 	if cfg == nil {
-		cfg = gojira.NewConfigDefault()
+		cfg = jira.NewConfigDefault()
 	}
 	return IssuesSet{
 		Config:    cfg,
 		IssuesMap: map[string]Issue{}}
 }
 
-func (set *IssuesSet) AddFromAPI(issues ...jira.Issue) error {
+func (set *IssuesSet) AddFromAPI(issues ...gojira.Issue) error {
 	for _, iss := range issues {
 		err := set.Add(IssueFromAPI(iss))
 		if err != nil {
@@ -75,7 +75,7 @@ func (set *IssuesSet) Table(baseURL string) table.Table {
 	baseURL = strings.TrimSpace(baseURL)
 
 	if set.Config == nil {
-		set.Config = gojira.NewConfigDefault()
+		set.Config = jira.NewConfigDefault()
 	}
 	tbl := table.NewTable("issues")
 	tbl.Columns = []string{"Type", "Key", "Summary", "Status", "Resolution", "Aggregate Original Time Estimate Seconds", "Original Estimate Seconds", "Original Estimate Days", "Estimate Days", "Time Spent", "Time Remaining"}

@@ -2,4 +2,5 @@
 .env
 _*
 site/
+/gojira
 /gojira-mcp

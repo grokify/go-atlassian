@@ -7,7 +7,7 @@ import (
 	"sort"
 	"strings"
 
-	"github.com/grokify/gojira/rest"
+	"github.com/grokify/go-atlassian/jira"
 	"github.com/spf13/cobra"
 	toon "github.com/toon-format/toon-go"
 )
@@ -140,7 +140,7 @@ func runStats(cmd *cobra.Command, args []string) error {
 	return outputStats(output, format)
 }
 
-func computeCounts(issues rest.Issues, field string) (map[string]uint, error) {
+func computeCounts(issues jira.Issues, field string) (map[string]uint, error) {
 	field = strings.ToLower(field)
 
 	// Convert to IssuesSet for most operations
@@ -173,7 +173,7 @@ func computeCounts(issues rest.Issues, field string) (map[string]uint, error) {
 	return nil, fmt.Errorf("unknown field %q: use status, type, priority, assignee, project, resolution, or customfield_XXXXX", field)
 }
 
-func countsByPriority(issues rest.Issues) map[string]uint {
+func countsByPriority(issues jira.Issues) map[string]uint {
 	counts := make(map[string]uint)
 	for _, iss := range issues {
 		priority := "(none)"
@@ -185,10 +185,10 @@ func countsByPriority(issues rest.Issues) map[string]uint {
 	return counts
 }
 
-func countsByAssignee(issues rest.Issues) map[string]uint {
+func countsByAssignee(issues jira.Issues) map[string]uint {
 	counts := make(map[string]uint)
 	for _, iss := range issues {
-		im := rest.NewIssueMore(&iss)
+		im := jira.NewIssueMore(&iss)
 		assignee := im.AssigneeName()
 		if assignee == "" {
 			assignee = "(unassigned)"
@@ -198,10 +198,10 @@ func countsByAssignee(issues rest.Issues) map[string]uint {
 	return counts
 }
 
-func countsByResolution(issues rest.Issues) map[string]uint {
+func countsByResolution(issues jira.Issues) map[string]uint {
 	counts := make(map[string]uint)
 	for _, iss := range issues {
-		im := rest.NewIssueMore(&iss)
+		im := jira.NewIssueMore(&iss)
 		resolution := im.Resolution()
 		if resolution == "" {
 			resolution = "(unresolved)"

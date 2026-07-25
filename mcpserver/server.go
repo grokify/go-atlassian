@@ -8,17 +8,17 @@ import (
 	"fmt"
 	"log/slog"
 
-	"github.com/grokify/gojira/rest"
+	"github.com/grokify/go-atlassian/jira"
 )
 
 // Server handles MCP protocol requests for Jira operations.
 type Server struct {
-	client *rest.Client
+	client *jira.Client
 	logger *slog.Logger
 }
 
 // NewServer creates a new MCP server with the given Jira client.
-func NewServer(client *rest.Client, logger *slog.Logger) *Server {
+func NewServer(client *jira.Client, logger *slog.Logger) *Server {
 	if logger == nil {
 		logger = slog.Default()
 	}

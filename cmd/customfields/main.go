@@ -5,8 +5,8 @@ import (
 	"os"
 	"strings"
 
-	"github.com/grokify/gojira/cmd"
-	"github.com/grokify/gojira/rest"
+	"github.com/grokify/go-atlassian/cmd"
+	"github.com/grokify/go-atlassian/jira"
 	flags "github.com/jessevdk/go-flags"
 )
 
@@ -61,7 +61,7 @@ func main() {
 		os.Exit(7)
 	}
 
-	cfsName := rest.CustomFields{cfName}
+	cfsName := jira.CustomFields{cfName}
 	if err := cfsName.WriteTable(os.Stdout); err != nil {
 		slog.Error("failed to write table", "error", err)
 		os.Exit(8)

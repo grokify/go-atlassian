@@ -1,4 +1,4 @@
-module github.com/grokify/gojira
+module github.com/grokify/go-atlassian
 
 go 1.26.0
 

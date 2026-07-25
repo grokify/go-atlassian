@@ -33,8 +33,8 @@ import (
 	"os"
 	"strings"
 
-	"github.com/grokify/gojira/mcpserver"
-	"github.com/grokify/gojira/rest"
+	"github.com/grokify/go-atlassian/jira"
+	"github.com/grokify/go-atlassian/mcpserver"
 )
 
 func main() {
@@ -59,7 +59,7 @@ func main() {
 	}
 
 	// Create Jira client
-	client, err := rest.NewClientFromBasicAuth(baseURL, username, apiToken, false)
+	client, err := jira.NewClientFromBasicAuth(baseURL, username, apiToken, false)
 	if err != nil {
 		logger.Error("failed to create Jira client", "error", err)
 		fmt.Fprintf(os.Stderr, "Error creating Jira client: %v\n", err)

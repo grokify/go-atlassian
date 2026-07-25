@@ -7,8 +7,8 @@ import (
 	"strings"
 	"time"
 
-	jira "github.com/andygrunwald/go-jira"
-	"github.com/grokify/gojira"
+	gojira "github.com/andygrunwald/go-jira"
+	"github.com/grokify/go-atlassian/jira"
 	"github.com/grokify/mogo/encoding/xmlutil"
 )
 
@@ -169,7 +169,7 @@ func (s RFC1123ZString) Time() (time.Time, error) {
 	return time.Parse(time.RFC1123Z, strings.TrimSpace(string(s)))
 }
 
-func RFC1123ZStringJiraTime(t jira.Time) RFC1123ZString {
+func RFC1123ZStringJiraTime(t gojira.Time) RFC1123ZString {
 	return RFC1123ZString(time.Time(t).Format(time.RFC1123Z))
 }
 
@@ -230,7 +230,7 @@ func (d *Duration) Duration() time.Duration {
 
 func (d *Duration) Days(workingHoursPerDay float32) float32 {
 	if workingHoursPerDay == 0 {
-		workingHoursPerDay = gojira.WorkingDaysPerWeekDefault
+		workingHoursPerDay = jira.WorkingDaysPerWeekDefault
 	}
 	return float32(d.Seconds) / 60 / 60 / workingHoursPerDay
 }
