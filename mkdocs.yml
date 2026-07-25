@@ -1,4 +1,4 @@
-site_name: GoJira
+site_name: Go-Atlassian
 site_description: Go SDK and CLI for Jira
 site_url: https://grokify.github.io/go-atlassian/
 repo_url: https://github.com/grokify/go-atlassian

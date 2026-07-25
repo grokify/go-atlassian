@@ -4,7 +4,7 @@
 
 ```
 ┌─────────────────────────────────────────────────────────────────────┐
-│                         go-atlassian Report System                         │
+│                         Go-Atlassian Report System                         │
 │                                                                      │
 │  ┌──────────────────┐    ┌──────────────────┐    ┌───────────────┐  │
 │  │  Report Schema   │    │  Report Engine   │    │  CLI Commands │  │
@@ -13,7 +13,7 @@
 │                                   │                                  │
 │                                   ▼                                  │
 │  ┌──────────────────────────────────────────────────────────────┐   │
-│  │                    go-atlassian SDK (jira package)                  │   │
+│  │                    Go-Atlassian SDK (jira package)                  │   │
 │  │  ┌─────────┐ ┌─────────┐ ┌─────────┐ ┌─────────┐ ┌─────────┐ │   │
 │  │  │ Issue   │ │ Board   │ │ Sprint  │ │ Worklog │ │ Custom  │ │   │
 │  │  │ Service │ │ Service │ │ Service │ │ Reports │ │ Fields  │ │   │
@@ -669,5 +669,5 @@ func TestFullReportGeneration(t *testing.T) {
 
 1. **JQL Injection**: Validate and sanitize user-provided JQL
 2. **Variable Validation**: Validate variable values against schema
-3. **Authentication**: Use existing go-atlassian authentication mechanisms
+3. **Authentication**: Use existing Go-Atlassian authentication mechanisms
 4. **Export Security**: Sanitize HTML output to prevent XSS

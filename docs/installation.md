@@ -16,7 +16,7 @@ gojira version
 
 ## SDK Installation
 
-Add go-atlassian as a dependency to your Go project:
+Add Go-Atlassian as a dependency to your Go project:
 
 ```bash
 go get github.com/grokify/go-atlassian
@@ -44,7 +44,7 @@ For Jira Cloud, you need an API token instead of your password:
 
 1. Go to [Atlassian API Tokens](https://id.atlassian.com/manage-profile/security/api-tokens)
 2. Click **Create API token**
-3. Give it a descriptive name (e.g., "gojira CLI")
+3. Give it a descriptive name (e.g., "Go-Atlassian CLI")
 4. Copy the token - you won't see it again
 
 !!! warning "Keep your token secure"

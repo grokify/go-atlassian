@@ -1,8 +1,8 @@
-# go-atlassian v1.0 Technical Requirements Document
+# Go-Atlassian v1.0 Technical Requirements Document
 
 ## Overview
 
-This document provides technical details and implementation guidance for the go-atlassian v1.0 release.
+This document provides technical details and implementation guidance for the Go-Atlassian v1.0 release.
 
 ## Current State Analysis
 

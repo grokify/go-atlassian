@@ -1,6 +1,6 @@
 # Authentication
 
-go-atlassian supports multiple authentication methods to connect to your Jira instance.
+Go-Atlassian supports multiple authentication methods to connect to your Jira instance.
 
 ## Authentication Priority
 
@@ -87,7 +87,7 @@ If no `--account` is specified, goauth will interactively prompt you to select a
 
 1. Go to [Atlassian API Tokens](https://id.atlassian.com/manage-profile/security/api-tokens)
 2. Click **Create API token**
-3. Give it a descriptive name (e.g., "gojira CLI")
+3. Give it a descriptive name (e.g., "Go-Atlassian CLI")
 4. Copy the token immediately
 
 ### Jira Server / Data Center

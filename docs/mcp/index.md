@@ -1,6 +1,6 @@
 # MCP Server
 
-go-atlassian includes an MCP (Model Context Protocol) server that enables AI assistants like Claude to interact with Jira directly.
+Go-Atlassian includes an MCP (Model Context Protocol) server that enables AI assistants like Claude to interact with Jira directly.
 
 ## Overview
 

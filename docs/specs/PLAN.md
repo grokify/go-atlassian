@@ -1,4 +1,4 @@
-# go-atlassian Implementation Plan
+# Go-Atlassian Implementation Plan
 
 This document contains detailed implementation specifications for planned features.
 

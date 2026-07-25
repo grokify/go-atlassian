@@ -1,6 +1,6 @@
 # Troubleshooting Guide
 
-Common issues and solutions when using go-atlassian.
+Common issues and solutions when using Go-Atlassian.
 
 ## Authentication Issues
 

@@ -1,8 +1,8 @@
-# go-atlassian v1.0 Product Requirements Document
+# Go-Atlassian v1.0 Product Requirements Document
 
 ## Overview
 
-This document outlines the requirements and considerations for the go-atlassian v1.0 release, focusing on API stability, consistency, and developer experience.
+This document outlines the requirements and considerations for the Go-Atlassian v1.0 release, focusing on API stability, consistency, and developer experience.
 
 ## Goals
 

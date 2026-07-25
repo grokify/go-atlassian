@@ -159,7 +159,7 @@
 | gojsonschema | v1.2.0 | JSON Schema validation |
 | chromedp | v0.9.3 | PDF export (optional) |
 
-### go-atlassian Prerequisites
+### Go-Atlassian Prerequisites
 
 | Feature | Version | Required For |
 |---------|---------|--------------|

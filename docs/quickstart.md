@@ -1,6 +1,6 @@
 # Quick Start
 
-Get up and running with go-atlassian in minutes.
+Get up and running with Go-Atlassian in minutes.
 
 ## Prerequisites
 
@@ -65,7 +65,7 @@ gojira stats --jql "project = FOO" --by assignee
 
 ## Output Formats
 
-go-atlassian supports three output formats:
+Go-Atlassian supports three output formats:
 
 | Format | Flag | Use Case |
 |--------|------|----------|

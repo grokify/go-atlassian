@@ -2,11 +2,11 @@
 
 ## Executive Summary
 
-Integrate go-atlassian with Dashforge to provide a powerful, reusable report generation system that supports both interactive notebook-style exploration and static report export. This integration enables users to create Jira-based reports and dashboards using a JSON-first intermediate representation (IR) that can be rendered interactively or exported to static formats.
+Integrate Go-Atlassian with Dashforge to provide a powerful, reusable report generation system that supports both interactive notebook-style exploration and static report export. This integration enables users to create Jira-based reports and dashboards using a JSON-first intermediate representation (IR) that can be rendered interactively or exported to static formats.
 
 ## Problem Statement
 
-Currently, go-atlassian provides excellent CLI and SDK capabilities for querying Jira data and generating reports (velocity, burndown, worklog, cycle-time). However:
+Currently, Go-Atlassian provides excellent CLI and SDK capabilities for querying Jira data and generating reports (velocity, burndown, worklog, cycle-time). However:
 
 1. **No unified report format** - Each report command outputs independently with no way to combine them
 2. **Limited visualization** - Output is text-based (JSON, table, CSV, markdown)
@@ -17,7 +17,7 @@ Currently, go-atlassian provides excellent CLI and SDK capabilities for querying
 
 Create a hybrid integration where:
 
-- **go-atlassian** handles Jira data fetching, transformation, and business logic
+- **Go-Atlassian** handles Jira data fetching, transformation, and business logic
 - **Dashforge** provides the visualization IR, rendering, and export capabilities
 
 This produces a **Jira Report IR** that transforms into **Dashforge Dashboard IR** for rendering.
@@ -106,7 +106,7 @@ pdf := dashforge.RenderPDF(dashboard)
 - Markdown sections for commentary
 
 ### FR-2: Data Fetching Layer
-- Execute JQL queries via go-atlassian SDK
+- Execute JQL queries via Go-Atlassian SDK
 - Fetch sprint/board data for reports
 - Calculate derived metrics (velocity, cycle time, etc.)
 - Cache results for performance
@@ -142,7 +142,7 @@ pdf := dashforge.RenderPDF(dashboard)
 
 ### NFR-2: Compatibility
 - Dashforge IR v1.0 compatibility
-- go-atlassian SDK v0.37+ compatibility
+- Go-Atlassian SDK v0.37+ compatibility
 - Works with Jira Cloud and Server
 
 ### NFR-3: Extensibility
@@ -152,7 +152,7 @@ pdf := dashforge.RenderPDF(dashboard)
 
 ## Success Metrics
 
-1. **Adoption**: 50% of go-atlassian users try report generation within 3 months
+1. **Adoption**: 50% of Go-Atlassian users try report generation within 3 months
 2. **Retention**: Users generate 2+ reports per week on average
 3. **Satisfaction**: NPS score > 40 for report features
 
@@ -166,7 +166,7 @@ pdf := dashforge.RenderPDF(dashboard)
 ## Dependencies
 
 - Dashforge v0.1.0+ (Dashboard IR, viewer)
-- go-atlassian v0.37.0+ (SDK, CLI)
+- Go-Atlassian v0.37.0+ (SDK, CLI)
 - ECharts (via Dashforge viewer)
 
 ## Timeline

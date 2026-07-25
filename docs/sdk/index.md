@@ -1,6 +1,6 @@
 # SDK Guide
 
-go-atlassian provides a Go SDK for interacting with the Jira REST API. The SDK is organized into packages with clear dependency boundaries.
+Go-Atlassian provides a Go SDK for interacting with the Jira REST API. The SDK is organized into packages with clear dependency boundaries.
 
 ## Package Structure
 

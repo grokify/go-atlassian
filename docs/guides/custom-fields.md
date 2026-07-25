@@ -1,6 +1,6 @@
 # Working with Custom Fields
 
-Custom fields are user-defined fields in Jira that extend the default issue schema. This guide covers how to discover, use, and manage custom fields with go-atlassian.
+Custom fields are user-defined fields in Jira that extend the default issue schema. This guide covers how to discover, use, and manage custom fields with Go-Atlassian.
 
 ## Understanding Custom Field IDs
 

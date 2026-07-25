@@ -1,6 +1,6 @@
-# go-atlassian Roadmap
+# Go-Atlassian Roadmap
 
-This document outlines planned features and enhancements for go-atlassian.
+This document outlines planned features and enhancements for Go-Atlassian.
 
 ## v0.33.0 - CLI & SDK Enhancements (Completed)
 

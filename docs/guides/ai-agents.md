@@ -1,8 +1,8 @@
 # AI Agents Guide
 
-go-atlassian is designed to work well with AI agents like Claude Code. This guide covers best practices for AI-agent workflows.
+Go-Atlassian is designed to work well with AI agents like Claude Code. This guide covers best practices for AI-agent workflows.
 
-## Why go-atlassian for AI Agents?
+## Why Go-Atlassian for AI Agents?
 
 1. **Non-interactive operation**: All auth via environment variables or files
 2. **Structured output**: JSON and TOON formats for reliable parsing

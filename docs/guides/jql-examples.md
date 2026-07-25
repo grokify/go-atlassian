@@ -1,6 +1,6 @@
 # JQL Examples
 
-Common JQL (Jira Query Language) patterns for use with the go-atlassian CLI and SDK.
+Common JQL (Jira Query Language) patterns for use with the Go-Atlassian CLI and SDK.
 
 ## Basic Queries
 

@@ -1,4 +1,4 @@
-# go-atlassian
+# Go-Atlassian
 
 [![Go CI][go-ci-svg]][go-ci-url]
 [![Go Lint][go-lint-svg]][go-lint-url]
@@ -19,13 +19,13 @@
  [docs-site-svg]: https://img.shields.io/badge/docs-MkDocs-blue.svg
  [docs-site-url]: https://grokify.github.io/go-atlassian/
  [viz-svg]: https://img.shields.io/badge/visualizaton-Go-blue.svg
- [viz-url]: https://mango-dune-07a8b7110.1.azurestaticapps.net/?repo=grokify%2Fgojira
+ [viz-url]: https://mango-dune-07a8b7110.1.azurestaticapps.net/?repo=grokify%2Fgo-atlassian
  [loc-svg]: https://tokei.rs/b1/github/grokify/go-atlassian
  [repo-url]: https://github.com/grokify/go-atlassian
  [license-svg]: https://img.shields.io/badge/license-MIT-blue.svg
  [license-url]: https://github.com/grokify/go-atlassian/blob/main/LICENSE
 
-go-atlassian is a Go SDK and CLI for Jira that provides:
+Go-Atlassian is a Go SDK and CLI for Jira that provides:
 
 - **REST API client** (`jira/`) - wrapper around [`go-jira`](https://github.com/andygrunwald/go-jira) with additional utilities
 - **XML parser** (`xml/`) - parse Jira XML exports when API access is unavailable
@@ -168,7 +168,7 @@ Full documentation is available at **[grokify.github.io/go-atlassian](https://gr
 
 - [CLI Reference](https://grokify.github.io/go-atlassian/cli/) - All commands and flags
 - [MCP Server](https://grokify.github.io/go-atlassian/mcp/) - Setup for AI assistants
-- [SDK Guide](https://grokify.github.io/go-atlassian/sdk/) - Using go-atlassian as a library
+- [SDK Guide](https://grokify.github.io/go-atlassian/sdk/) - Using Go-Atlassian as a library
 - [AI Agents Guide](https://grokify.github.io/go-atlassian/guides/ai-agents/) - Integration with LLMs
 - [JQL Examples](https://grokify.github.io/go-atlassian/guides/jql-examples/) - Common query patterns
 
