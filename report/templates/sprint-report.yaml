@@ -1,0 +1,147 @@
+# Sprint Progress Report
+# This template generates a comprehensive sprint report including:
+# - Sprint velocity chart
+# - Burndown chart
+# - Issue breakdown table
+# - Key metrics
+
+id: sprint-report
+title: Sprint Progress Report
+description: Comprehensive sprint analysis with velocity, burndown, and issue breakdown
+version: "1.0"
+
+variables:
+  - id: board_id
+    type: number
+    label: Board ID
+    description: The Jira board ID to analyze
+    required: true
+  - id: sprint_count
+    type: number
+    label: Sprint Count
+    default: 6
+    description: Number of past sprints for velocity chart
+  - id: current_sprint
+    type: number
+    label: Current Sprint ID
+    description: Sprint ID for burndown chart
+
+sections:
+  # Introduction
+  - id: intro
+    type: markdown
+    title: Sprint Progress Report
+    content: |
+      # Sprint Progress Report
+
+      This report provides an overview of sprint progress including velocity trends,
+      burndown status, and issue breakdown.
+
+  # Velocity Chart
+  - id: velocity
+    type: velocity
+    title: Team Velocity
+    position:
+      x: 0
+      y: 2
+      w: 6
+      h: 4
+    config:
+      board_id: "{{board_id}}"
+      sprint_count: "{{sprint_count}}"
+      chart_type: bar
+      include_active: false
+
+  # Burndown Chart
+  - id: burndown
+    type: burndown
+    title: Sprint Burndown
+    position:
+      x: 6
+      y: 2
+      w: 6
+      h: 4
+    config:
+      sprint_id: "{{current_sprint}}"
+      show_ideal_line: true
+
+  # Issue Metrics
+  - id: total-issues
+    type: metric
+    title: Total Issues
+    position:
+      x: 0
+      y: 6
+      w: 3
+      h: 2
+    config:
+      jql: "Sprint = {{current_sprint}}"
+      aggregation: count
+
+  - id: completed-issues
+    type: metric
+    title: Completed
+    position:
+      x: 3
+      y: 6
+      w: 3
+      h: 2
+    config:
+      jql: "Sprint = {{current_sprint}} AND status = Done"
+      aggregation: count
+
+  - id: in-progress
+    type: metric
+    title: In Progress
+    position:
+      x: 6
+      y: 6
+      w: 3
+      h: 2
+    config:
+      jql: "Sprint = {{current_sprint}} AND status = 'In Progress'"
+      aggregation: count
+
+  - id: todo
+    type: metric
+    title: To Do
+    position:
+      x: 9
+      y: 6
+      w: 3
+      h: 2
+    config:
+      jql: "Sprint = {{current_sprint}} AND status = 'To Do'"
+      aggregation: count
+
+  # Issue Table
+  - id: issues-table
+    type: table
+    title: Sprint Issues
+    position:
+      x: 0
+      y: 8
+      w: 12
+      h: 6
+    config:
+      jql: "Sprint = {{current_sprint}} ORDER BY status ASC, priority DESC"
+      fields:
+        - key
+        - summary
+        - status
+        - assignee
+        - priority
+      sortable: true
+      paginated: true
+      max_results: 50
+
+theme:
+  dark_mode: false
+  colors:
+    primary: "#6366f1"
+    secondary: "#8b5cf6"
+    success: "#22c55e"
+    warning: "#f59e0b"
+    danger: "#ef4444"
+
+author: GoJira
