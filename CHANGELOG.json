@@ -1,23 +1,25 @@
 {
   "irVersion": "1.0",
-  "project": "gojira",
-  "repository": "https://github.com/grokify/gojira",
+  "project": "go-atlassian",
+  "repository": "https://github.com/grokify/go-atlassian",
   "versioning": "semver",
   "commitConvention": "conventional",
   "maintainers": ["grokify", "johncwang@gmail.com"],
   "releases": [
     {
       "version": "v0.32.0",
-      "date": "2026-07-12",
+      "date": "2026-07-25",
       "highlights": [
-        { "description": "Duplicate custom field name handling with `GetCustomFieldsByName()` and `DuplicateNames()`" },
-        { "description": "Project-based field filtering via createmeta API" },
-        { "description": "CLI `--project`, `--issue-type`, `--show-duplicates` flags for fields command" }
+        { "description": "Module renamed to `github.com/grokify/go-atlassian`; root and `rest` packages consolidated into a single `jira` sub-package to support a multi-product Atlassian architecture" },
+        { "description": "New `confluence` package with a Confluence REST API client and Storage Format IR (parse, render, validate)" },
+        { "description": "New `report` package: configurable report engine with template-based rendering and export formats" },
+        { "description": "CLI commands for Agile boards, sprints, and workflow transitions (`boards`, `sprints`, `velocity`, `burndown`, `transition`, `clone`, and more)" }
       ],
       "breaking": [
         { "description": "`TransitionsAPIReponse` renamed to `TransitionsAPIResponse` (typo fix)", "commit": "2ffff0f" },
         { "description": "`ReadyforPlanningName` renamed to `ReadyForPlanningName` (typo fix)", "commit": "7671087" },
-        { "description": "`ReadyForDevlopmentName` renamed to `ReadyForDevelopmentName` (typo fix)", "commit": "7671087" }
+        { "description": "`ReadyForDevlopmentName` renamed to `ReadyForDevelopmentName` (typo fix)", "commit": "7671087" },
+        { "description": "Module renamed from `github.com/grokify/gojira` to `github.com/grokify/go-atlassian`; root package (`atlassian`) and `rest` package merged into a new `jira` sub-package. All consumer imports (`cmd/`, `core/`, `xml/`, `mcpserver/`) updated accordingly", "commit": "7f1c04a" }
       ],
       "added": [
         { "description": "`CustomFields.MapNameToIDs()`, `MapIDToName()`, `DuplicateNames()` helper methods", "commit": "7de5a10" },
@@ -34,7 +36,14 @@
         { "description": "`Client.CreateMetaAPI` for project-based field discovery", "commit": "b36eaf6" },
         { "description": "`--project` flag on `fields` command for project-based filtering", "commit": "7ec862a" },
         { "description": "`--issue-type` flag on `fields` command (requires `--project`)", "commit": "7ec862a" },
-        { "description": "`--show-duplicates` flag on `fields` command to detect ambiguous field names", "commit": "7ec862a" }
+        { "description": "`--show-duplicates` flag on `fields` command to detect ambiguous field names", "commit": "7ec862a" },
+        { "description": "`confluence` package: Confluence REST API client with Storage Format IR for parsing, rendering, and validating content", "commit": "78e6034" },
+        { "description": "`report` package: configurable report engine with template-based rendering, section processors, and export formats for Jira issue data", "commit": "d5be7f2" },
+        { "description": "CLI commands for Agile workflows: `boards`, `sprints`, `sprint-issues`, `sprint-move`, `velocity`, `burndown`, `cycle-time`, `worklog`, `transition`, `transitions`, `bulk-transition`, `clone`, `bulk-update`, `link`, `issue-types`, `report`", "commit": "5862748" },
+        { "description": "`jira` package board service, `clone`, `webhook`, and `workflow` capabilities", "commit": "7f1c04a" },
+        { "description": "Createmeta validation support in `core` package", "commit": "7f1c04a" },
+        { "description": "MCP server expanded to 18 tools covering board, sprint, and reporting operations", "commit": "7f1c04a" },
+        { "description": "Output format support for TOON, CSV, Markdown, and table rendering", "commit": "7f1c04a" }
       ],
       "fixed": [
         { "description": "JQL builder now quotes field names containing spaces", "commit": "509ba97" }
@@ -48,7 +57,14 @@
         { "description": "v1.0 PRD and TRD specifications", "commit": "4120fe5" },
         { "description": "Updated `fields` command documentation with new flags", "commit": "2d351cb" },
         { "description": "SDK documentation for custom field and createmeta APIs", "commit": "606519b" },
-        { "description": "v0.32.0 release notes", "commit": "e66ce71" }
+        { "description": "v0.32.0 release notes", "commit": "e66ce71" },
+        { "description": "Added go-atlassian migration plan and roadmap specs, plus custom-fields and troubleshooting guides", "commit": "aebeac2" },
+        { "description": "Renamed `gojira/rest` references to `go-atlassian/jira` across README, SDK guides, release notes, specs, and CLI docs", "commit": "b3a80ff" },
+        { "description": "Standardized naming convention: \"Go-Atlassian\" for prose/headings, `go-atlassian` for import paths, URLs, and CLI references", "commit": "f181c84" },
+        { "description": "Updated internal task tracking (`TASKS.md`) with completed items", "commit": "a49292e" }
+      ],
+      "dependencies": [
+        { "description": "Updated Go module dependencies (`go.mod`, `go.sum`)", "commit": "30c8ac8" }
       ]
     },
     {
