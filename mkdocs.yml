@@ -1,5 +1,5 @@
 site_name: Go-Atlassian
-site_description: Go SDK and CLI for Jira
+site_description: Go SDK and CLI for Atlassian products (Jira and Confluence)
 site_url: https://grokify.github.io/go-atlassian/
 repo_url: https://github.com/grokify/go-atlassian
 repo_name: grokify/go-atlassian
@@ -65,7 +65,9 @@ nav:
       - JQL Builder: sdk/jql.md
   - Guides:
       - AI Agents: guides/ai-agents.md
+      - Custom Fields: guides/custom-fields.md
       - JQL Examples: guides/jql-examples.md
+      - Troubleshooting: guides/troubleshooting.md
   - Releases:
       - v0.32.0: releases/v0.32.0.md
       - v0.31.0: releases/v0.31.0.md

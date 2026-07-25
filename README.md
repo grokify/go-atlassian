@@ -25,9 +25,11 @@
  [license-svg]: https://img.shields.io/badge/license-MIT-blue.svg
  [license-url]: https://github.com/grokify/go-atlassian/blob/main/LICENSE
 
-Go-Atlassian is a Go SDK and CLI for Jira that provides:
+Go-Atlassian is a Go SDK and CLI for Atlassian products (Jira and Confluence) that provides:
 
-- **REST API client** (`jira/`) - wrapper around [`go-jira`](https://github.com/andygrunwald/go-jira) with additional utilities
+- **Jira REST API client** (`jira/`) - wrapper around [`go-jira`](https://github.com/andygrunwald/go-jira) with additional utilities
+- **Confluence REST API client** (`confluence/`) - page reading, writing, and Storage Format IR
+- **Report engine** (`report/`) - configurable report definitions with Dashforge Dashboard IR output
 - **XML parser** (`xml/`) - parse Jira XML exports when API access is unavailable
 - **JQL builder** (root package) - programmatically construct JQL queries
 - **CLI tool** (`cmd/gojira/`) - command-line interface optimized for AI agents and humans
@@ -156,7 +158,9 @@ query := jql.String() // "project = 'FOO' AND status IN ('Open', 'In Progress')"
 | Package | Description | Dependencies |
 |---------|-------------|--------------|
 | root | JQL builder, config, constants | None (lightweight) |
-| `go-atlassian/jira` | REST API client | go-jira SDK |
+| `go-atlassian/jira` | Jira REST API client | go-jira SDK |
+| `go-atlassian/confluence` | Confluence REST API client with Storage Format IR | go-atlassian/jira |
+| `go-atlassian/report` | Configurable report engine with Dashforge Dashboard IR output | go-atlassian/jira |
 | `go-atlassian/core` | Shared types for issue creation | yaml.v3 |
 | `go-atlassian/mcpserver` | MCP server implementation | JSON-RPC |
 | `go-atlassian/xml` | XML export parser | None |
