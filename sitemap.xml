@@ -1,107 +1,143 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
-         <loc>https://grokify.github.io/gojira/</loc>
-         <lastmod>2026-06-14</lastmod>
+         <loc>https://grokify.github.io/go-atlassian/</loc>
+         <lastmod>2026-07-25</lastmod>
     </url>
     <url>
-         <loc>https://grokify.github.io/gojira/installation/</loc>
-         <lastmod>2026-06-14</lastmod>
+         <loc>https://grokify.github.io/go-atlassian/installation/</loc>
+         <lastmod>2026-07-25</lastmod>
     </url>
     <url>
-         <loc>https://grokify.github.io/gojira/quickstart/</loc>
-         <lastmod>2026-06-14</lastmod>
+         <loc>https://grokify.github.io/go-atlassian/quickstart/</loc>
+         <lastmod>2026-07-25</lastmod>
     </url>
     <url>
-         <loc>https://grokify.github.io/gojira/cli/</loc>
-         <lastmod>2026-06-14</lastmod>
+         <loc>https://grokify.github.io/go-atlassian/cli/</loc>
+         <lastmod>2026-07-25</lastmod>
     </url>
     <url>
-         <loc>https://grokify.github.io/gojira/cli/authentication/</loc>
-         <lastmod>2026-06-14</lastmod>
+         <loc>https://grokify.github.io/go-atlassian/cli/authentication/</loc>
+         <lastmod>2026-07-25</lastmod>
     </url>
     <url>
-         <loc>https://grokify.github.io/gojira/cli/comments/</loc>
-         <lastmod>2026-06-14</lastmod>
+         <loc>https://grokify.github.io/go-atlassian/cli/comments/</loc>
+         <lastmod>2026-07-25</lastmod>
     </url>
     <url>
-         <loc>https://grokify.github.io/gojira/cli/create/</loc>
-         <lastmod>2026-06-14</lastmod>
+         <loc>https://grokify.github.io/go-atlassian/cli/create/</loc>
+         <lastmod>2026-07-25</lastmod>
     </url>
     <url>
-         <loc>https://grokify.github.io/gojira/cli/export/</loc>
-         <lastmod>2026-06-14</lastmod>
+         <loc>https://grokify.github.io/go-atlassian/cli/export/</loc>
+         <lastmod>2026-07-25</lastmod>
     </url>
     <url>
-         <loc>https://grokify.github.io/gojira/cli/fields/</loc>
-         <lastmod>2026-06-14</lastmod>
+         <loc>https://grokify.github.io/go-atlassian/cli/fields/</loc>
+         <lastmod>2026-07-25</lastmod>
     </url>
     <url>
-         <loc>https://grokify.github.io/gojira/cli/get/</loc>
-         <lastmod>2026-06-14</lastmod>
+         <loc>https://grokify.github.io/go-atlassian/cli/get/</loc>
+         <lastmod>2026-07-25</lastmod>
     </url>
     <url>
-         <loc>https://grokify.github.io/gojira/cli/patch/</loc>
-         <lastmod>2026-06-14</lastmod>
+         <loc>https://grokify.github.io/go-atlassian/cli/patch/</loc>
+         <lastmod>2026-07-25</lastmod>
     </url>
     <url>
-         <loc>https://grokify.github.io/gojira/cli/search/</loc>
-         <lastmod>2026-06-14</lastmod>
+         <loc>https://grokify.github.io/go-atlassian/cli/search/</loc>
+         <lastmod>2026-07-25</lastmod>
     </url>
     <url>
-         <loc>https://grokify.github.io/gojira/cli/stats/</loc>
-         <lastmod>2026-06-14</lastmod>
+         <loc>https://grokify.github.io/go-atlassian/cli/stats/</loc>
+         <lastmod>2026-07-25</lastmod>
     </url>
     <url>
-         <loc>https://grokify.github.io/gojira/guides/ai-agents/</loc>
-         <lastmod>2026-06-14</lastmod>
+         <loc>https://grokify.github.io/go-atlassian/guides/ai-agents/</loc>
+         <lastmod>2026-07-25</lastmod>
     </url>
     <url>
-         <loc>https://grokify.github.io/gojira/guides/jql-examples/</loc>
-         <lastmod>2026-06-14</lastmod>
+         <loc>https://grokify.github.io/go-atlassian/guides/custom-fields/</loc>
+         <lastmod>2026-07-25</lastmod>
     </url>
     <url>
-         <loc>https://grokify.github.io/gojira/mcp/</loc>
-         <lastmod>2026-06-14</lastmod>
+         <loc>https://grokify.github.io/go-atlassian/guides/jql-examples/</loc>
+         <lastmod>2026-07-25</lastmod>
     </url>
     <url>
-         <loc>https://grokify.github.io/gojira/releases/v0.28.0/</loc>
-         <lastmod>2026-06-14</lastmod>
+         <loc>https://grokify.github.io/go-atlassian/guides/troubleshooting/</loc>
+         <lastmod>2026-07-25</lastmod>
     </url>
     <url>
-         <loc>https://grokify.github.io/gojira/releases/v0.29.0/</loc>
-         <lastmod>2026-06-14</lastmod>
+         <loc>https://grokify.github.io/go-atlassian/mcp/</loc>
+         <lastmod>2026-07-25</lastmod>
     </url>
     <url>
-         <loc>https://grokify.github.io/gojira/releases/v0.30.0/</loc>
-         <lastmod>2026-06-14</lastmod>
+         <loc>https://grokify.github.io/go-atlassian/releases/v0.28.0/</loc>
+         <lastmod>2026-07-25</lastmod>
     </url>
     <url>
-         <loc>https://grokify.github.io/gojira/releases/v0.31.0/</loc>
-         <lastmod>2026-06-14</lastmod>
+         <loc>https://grokify.github.io/go-atlassian/releases/v0.29.0/</loc>
+         <lastmod>2026-07-25</lastmod>
     </url>
     <url>
-         <loc>https://grokify.github.io/gojira/sdk/</loc>
-         <lastmod>2026-06-14</lastmod>
+         <loc>https://grokify.github.io/go-atlassian/releases/v0.30.0/</loc>
+         <lastmod>2026-07-25</lastmod>
     </url>
     <url>
-         <loc>https://grokify.github.io/gojira/sdk/client/</loc>
-         <lastmod>2026-06-14</lastmod>
+         <loc>https://grokify.github.io/go-atlassian/releases/v0.31.0/</loc>
+         <lastmod>2026-07-25</lastmod>
     </url>
     <url>
-         <loc>https://grokify.github.io/gojira/sdk/issues/</loc>
-         <lastmod>2026-06-14</lastmod>
+         <loc>https://grokify.github.io/go-atlassian/releases/v0.32.0/</loc>
+         <lastmod>2026-07-25</lastmod>
     </url>
     <url>
-         <loc>https://grokify.github.io/gojira/sdk/jql/</loc>
-         <lastmod>2026-06-14</lastmod>
+         <loc>https://grokify.github.io/go-atlassian/sdk/</loc>
+         <lastmod>2026-07-25</lastmod>
     </url>
     <url>
-         <loc>https://grokify.github.io/gojira/specs/features/v1/PRD/</loc>
-         <lastmod>2026-06-14</lastmod>
+         <loc>https://grokify.github.io/go-atlassian/sdk/client/</loc>
+         <lastmod>2026-07-25</lastmod>
     </url>
     <url>
-         <loc>https://grokify.github.io/gojira/specs/features/v1/TRD/</loc>
-         <lastmod>2026-06-14</lastmod>
+         <loc>https://grokify.github.io/go-atlassian/sdk/issues/</loc>
+         <lastmod>2026-07-25</lastmod>
+    </url>
+    <url>
+         <loc>https://grokify.github.io/go-atlassian/sdk/jql/</loc>
+         <lastmod>2026-07-25</lastmod>
+    </url>
+    <url>
+         <loc>https://grokify.github.io/go-atlassian/specs/PLAN/</loc>
+         <lastmod>2026-07-25</lastmod>
+    </url>
+    <url>
+         <loc>https://grokify.github.io/go-atlassian/specs/ROADMAP/</loc>
+         <lastmod>2026-07-25</lastmod>
+    </url>
+    <url>
+         <loc>https://grokify.github.io/go-atlassian/specs/dashforge-integration/PLAN/</loc>
+         <lastmod>2026-07-25</lastmod>
+    </url>
+    <url>
+         <loc>https://grokify.github.io/go-atlassian/specs/dashforge-integration/PRD/</loc>
+         <lastmod>2026-07-25</lastmod>
+    </url>
+    <url>
+         <loc>https://grokify.github.io/go-atlassian/specs/dashforge-integration/ROADMAP/</loc>
+         <lastmod>2026-07-25</lastmod>
+    </url>
+    <url>
+         <loc>https://grokify.github.io/go-atlassian/specs/dashforge-integration/TRD/</loc>
+         <lastmod>2026-07-25</lastmod>
+    </url>
+    <url>
+         <loc>https://grokify.github.io/go-atlassian/specs/features/v1/PRD/</loc>
+         <lastmod>2026-07-25</lastmod>
+    </url>
+    <url>
+         <loc>https://grokify.github.io/go-atlassian/specs/features/v1/TRD/</loc>
+         <lastmod>2026-07-25</lastmod>
     </url>
 </urlset>
