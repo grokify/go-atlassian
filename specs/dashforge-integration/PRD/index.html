@@ -23,7 +23,7 @@
     
     
       
-        <title>Dashforge Integration - Product Requirements Document - GoJira</title>
+        <title>Dashforge Integration - Product Requirements Document - Go-Atlassian</title>
       
     
     
@@ -88,7 +88,7 @@
 
 <header class="md-header" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="../../.." title="GoJira" class="md-header__button md-logo" aria-label="GoJira" data-md-component="logo">
+    <a href="../../.." title="Go-Atlassian" class="md-header__button md-logo" aria-label="Go-Atlassian" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -102,7 +102,7 @@
       <div class="md-header__ellipsis">
         <div class="md-header__topic">
           <span class="md-ellipsis">
-            GoJira
+            Go-Atlassian
           </span>
         </div>
         <div class="md-header__topic" data-md-component="header-topic">
@@ -376,13 +376,13 @@
 
 <nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../../.." title="GoJira" class="md-nav__button md-logo" aria-label="GoJira" data-md-component="logo">
+    <a href="../../.." title="Go-Atlassian" class="md-nav__button md-logo" aria-label="Go-Atlassian" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
 
     </a>
-    GoJira
+    Go-Atlassian
   </label>
   
     <div class="md-nav__source">
@@ -1850,9 +1850,9 @@
 
 <h1 id="dashforge-integration-product-requirements-document">Dashforge Integration - Product Requirements Document<a class="headerlink" href="#dashforge-integration-product-requirements-document" title="Permanent link">&para;</a></h1>
 <h2 id="executive-summary">Executive Summary<a class="headerlink" href="#executive-summary" title="Permanent link">&para;</a></h2>
-<p>Integrate go-atlassian with Dashforge to provide a powerful, reusable report generation system that supports both interactive notebook-style exploration and static report export. This integration enables users to create Jira-based reports and dashboards using a JSON-first intermediate representation (IR) that can be rendered interactively or exported to static formats.</p>
+<p>Integrate Go-Atlassian with Dashforge to provide a powerful, reusable report generation system that supports both interactive notebook-style exploration and static report export. This integration enables users to create Jira-based reports and dashboards using a JSON-first intermediate representation (IR) that can be rendered interactively or exported to static formats.</p>
 <h2 id="problem-statement">Problem Statement<a class="headerlink" href="#problem-statement" title="Permanent link">&para;</a></h2>
-<p>Currently, go-atlassian provides excellent CLI and SDK capabilities for querying Jira data and generating reports (velocity, burndown, worklog, cycle-time). However:</p>
+<p>Currently, Go-Atlassian provides excellent CLI and SDK capabilities for querying Jira data and generating reports (velocity, burndown, worklog, cycle-time). However:</p>
 <ol>
 <li><strong>No unified report format</strong> - Each report command outputs independently with no way to combine them</li>
 <li><strong>Limited visualization</strong> - Output is text-based (JSON, table, CSV, markdown)</li>
@@ -1862,7 +1862,7 @@
 <h2 id="solution-overview">Solution Overview<a class="headerlink" href="#solution-overview" title="Permanent link">&para;</a></h2>
 <p>Create a hybrid integration where:</p>
 <ul>
-<li><strong>go-atlassian</strong> handles Jira data fetching, transformation, and business logic</li>
+<li><strong>Go-Atlassian</strong> handles Jira data fetching, transformation, and business logic</li>
 <li><strong>Dashforge</strong> provides the visualization IR, rendering, and export capabilities</li>
 </ul>
 <p>This produces a <strong>Jira Report IR</strong> that transforms into <strong>Dashforge Dashboard IR</strong> for rendering.</p>
@@ -1945,7 +1945,7 @@
 </ul>
 <h3 id="fr-2-data-fetching-layer">FR-2: Data Fetching Layer<a class="headerlink" href="#fr-2-data-fetching-layer" title="Permanent link">&para;</a></h3>
 <ul>
-<li>Execute JQL queries via go-atlassian SDK</li>
+<li>Execute JQL queries via Go-Atlassian SDK</li>
 <li>Fetch sprint/board data for reports</li>
 <li>Calculate derived metrics (velocity, cycle time, etc.)</li>
 <li>Cache results for performance</li>
@@ -2007,7 +2007,7 @@
 <h3 id="nfr-2-compatibility">NFR-2: Compatibility<a class="headerlink" href="#nfr-2-compatibility" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Dashforge IR v1.0 compatibility</li>
-<li>go-atlassian SDK v0.37+ compatibility</li>
+<li>Go-Atlassian SDK v0.37+ compatibility</li>
 <li>Works with Jira Cloud and Server</li>
 </ul>
 <h3 id="nfr-3-extensibility">NFR-3: Extensibility<a class="headerlink" href="#nfr-3-extensibility" title="Permanent link">&para;</a></h3>
@@ -2018,7 +2018,7 @@
 </ul>
 <h2 id="success-metrics">Success Metrics<a class="headerlink" href="#success-metrics" title="Permanent link">&para;</a></h2>
 <ol>
-<li><strong>Adoption</strong>: 50% of go-atlassian users try report generation within 3 months</li>
+<li><strong>Adoption</strong>: 50% of Go-Atlassian users try report generation within 3 months</li>
 <li><strong>Retention</strong>: Users generate 2+ reports per week on average</li>
 <li><strong>Satisfaction</strong>: NPS score &gt; 40 for report features</li>
 </ol>
@@ -2032,7 +2032,7 @@
 <h2 id="dependencies">Dependencies<a class="headerlink" href="#dependencies" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Dashforge v0.1.0+ (Dashboard IR, viewer)</li>
-<li>go-atlassian v0.37.0+ (SDK, CLI)</li>
+<li>Go-Atlassian v0.37.0+ (SDK, CLI)</li>
 <li>ECharts (via Dashforge viewer)</li>
 </ul>
 <h2 id="timeline">Timeline<a class="headerlink" href="#timeline" title="Permanent link">&para;</a></h2>

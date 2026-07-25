@@ -23,7 +23,7 @@
     
     
       
-        <title>Dashforge Integration - Technical Requirements Document - GoJira</title>
+        <title>Dashforge Integration - Technical Requirements Document - Go-Atlassian</title>
       
     
     
@@ -88,7 +88,7 @@
 
 <header class="md-header" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="../../.." title="GoJira" class="md-header__button md-logo" aria-label="GoJira" data-md-component="logo">
+    <a href="../../.." title="Go-Atlassian" class="md-header__button md-logo" aria-label="Go-Atlassian" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -102,7 +102,7 @@
       <div class="md-header__ellipsis">
         <div class="md-header__topic">
           <span class="md-ellipsis">
-            GoJira
+            Go-Atlassian
           </span>
         </div>
         <div class="md-header__topic" data-md-component="header-topic">
@@ -376,13 +376,13 @@
 
 <nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../../.." title="GoJira" class="md-nav__button md-logo" aria-label="GoJira" data-md-component="logo">
+    <a href="../../.." title="Go-Atlassian" class="md-nav__button md-logo" aria-label="Go-Atlassian" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
 
     </a>
-    GoJira
+    Go-Atlassian
   </label>
   
     <div class="md-nav__source">
@@ -1718,7 +1718,7 @@
 <h1 id="dashforge-integration-technical-requirements-document">Dashforge Integration - Technical Requirements Document<a class="headerlink" href="#dashforge-integration-technical-requirements-document" title="Permanent link">&para;</a></h1>
 <h2 id="architecture-overview">Architecture Overview<a class="headerlink" href="#architecture-overview" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>┌─────────────────────────────────────────────────────────────────────┐
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>│                         go-atlassian Report System                         │
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>│                         Go-Atlassian Report System                         │
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>│                                                                      │
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>│  ┌──────────────────┐    ┌──────────────────┐    ┌───────────────┐  │
 <a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>│  │  Report Schema   │    │  Report Engine   │    │  CLI Commands │  │
@@ -1727,7 +1727,7 @@
 <a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>│                                   │                                  │
 <a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>│                                   ▼                                  │
 <a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>│  ┌──────────────────────────────────────────────────────────────┐   │
-<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>│  │                    go-atlassian SDK (jira package)                  │   │
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>│  │                    Go-Atlassian SDK (jira package)                  │   │
 <a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>│  │  ┌─────────┐ ┌─────────┐ ┌─────────┐ ┌─────────┐ ┌─────────┐ │   │
 <a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>│  │  │ Issue   │ │ Board   │ │ Sprint  │ │ Worklog │ │ Custom  │ │   │
 <a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>│  │  │ Service │ │ Service │ │ Service │ │ Reports │ │ Fields  │ │   │
@@ -2346,7 +2346,7 @@
 <ol>
 <li><strong>JQL Injection</strong>: Validate and sanitize user-provided JQL</li>
 <li><strong>Variable Validation</strong>: Validate variable values against schema</li>
-<li><strong>Authentication</strong>: Use existing go-atlassian authentication mechanisms</li>
+<li><strong>Authentication</strong>: Use existing Go-Atlassian authentication mechanisms</li>
 <li><strong>Export Security</strong>: Sanitize HTML output to prevent XSS</li>
 </ol>
 
