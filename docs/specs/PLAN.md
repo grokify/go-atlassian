@@ -1,4 +1,4 @@
-# GoJira Implementation Plan
+# go-atlassian Implementation Plan
 
 This document contains detailed implementation specifications for planned features.
 

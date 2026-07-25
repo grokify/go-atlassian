@@ -1,6 +1,6 @@
 # JQL Examples
 
-Common JQL (Jira Query Language) patterns for use with the GoJira CLI and SDK.
+Common JQL (Jira Query Language) patterns for use with the go-atlassian CLI and SDK.
 
 ## Basic Queries
 
@@ -300,9 +300,9 @@ gojira search --jql "project = FOO AND updated <= -30d AND status not in (Done, 
 Use the SDK's JQL builder for programmatic query construction:
 
 ```go
-import "github.com/grokify/gojira"
+import "github.com/grokify/go-atlassian"
 
-jql := gojira.JQL{
+jql := jira.JQL{
     ProjectsIncl: [][]string{{"FOO"}},
     TypesIncl:    [][]string{{"Bug"}},
     StatusesExcl: [][]string{{"Done", "Closed"}},

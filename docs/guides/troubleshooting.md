@@ -1,6 +1,6 @@
 # Troubleshooting Guide
 
-Common issues and solutions when using gojira.
+Common issues and solutions when using go-atlassian.
 
 ## Authentication Issues
 
@@ -261,7 +261,7 @@ If you're still experiencing issues:
    gojira search "project = PROJ"
    ```
 
-2. Check the [GitHub Issues](https://github.com/grokify/gojira/issues)
+2. Check the [GitHub Issues](https://github.com/grokify/go-atlassian/issues)
 
 3. Open a new issue with:
 

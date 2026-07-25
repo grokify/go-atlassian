@@ -1,13 +1,13 @@
 # JQL Builder
 
-The root `gojira` package provides a JQL builder for constructing Jira Query Language queries programmatically.
+The root package provides a JQL builder for constructing Jira Query Language queries programmatically.
 
 ## Basic Usage
 
 ```go
-import "github.com/grokify/gojira"
+import "github.com/grokify/go-atlassian"
 
-jql := gojira.JQL{
+jql := jira.JQL{
     ProjectsIncl: [][]string{{"FOO"}},
     StatusesIncl: [][]string{{"Open", "In Progress"}},
 }
@@ -76,7 +76,7 @@ type JQL struct {
 ### Single Project, Single Status
 
 ```go
-jql := gojira.JQL{
+jql := jira.JQL{
     ProjectsIncl: [][]string{{"FOO"}},
     StatusesIncl: [][]string{{"Open"}},
 }
@@ -86,7 +86,7 @@ jql := gojira.JQL{
 ### Multiple Projects
 
 ```go
-jql := gojira.JQL{
+jql := jira.JQL{
     ProjectsIncl: [][]string{{"FOO", "BAR", "BAZ"}},
 }
 // project IN ('FOO', 'BAR', 'BAZ')
@@ -95,7 +95,7 @@ jql := gojira.JQL{
 ### Multiple Status Groups (AND)
 
 ```go
-jql := gojira.JQL{
+jql := jira.JQL{
     StatusesIncl: [][]string{
         {"Open", "In Progress"},  // First condition
         {"Blocked"},               // AND this condition
@@ -107,7 +107,7 @@ jql := gojira.JQL{
 ### Exclude Conditions
 
 ```go
-jql := gojira.JQL{
+jql := jira.JQL{
     ProjectsIncl: [][]string{{"FOO"}},
     StatusesExcl: [][]string{{"Done", "Closed"}},
 }
@@ -120,7 +120,7 @@ jql := gojira.JQL{
 import "time"
 
 sevenDaysAgo := time.Now().AddDate(0, 0, -7)
-jql := gojira.JQL{
+jql := jira.JQL{
     ProjectsIncl: [][]string{{"FOO"}},
     CreatedGTE:   &sevenDaysAgo,
 }
@@ -130,7 +130,7 @@ jql := gojira.JQL{
 ### Text Search
 
 ```go
-jql := gojira.JQL{
+jql := jira.JQL{
     ProjectsIncl: [][]string{{"FOO"}},
     TextLike:     []string{"error"},
 }
@@ -140,7 +140,7 @@ jql := gojira.JQL{
 ### Summary Search
 
 ```go
-jql := gojira.JQL{
+jql := jira.JQL{
     SummaryLike: []string{"login", "authentication"},
 }
 // summary ~ "login" AND summary ~ "authentication"
@@ -149,7 +149,7 @@ jql := gojira.JQL{
 ### Custom Fields
 
 ```go
-jql := gojira.JQL{
+jql := jira.JQL{
     CustomFieldIncl: map[string][]string{
         "customfield_10001": {"Team A", "Team B"},
     },
@@ -162,7 +162,7 @@ jql := gojira.JQL{
 For complex conditions not supported by the builder:
 
 ```go
-jql := gojira.JQL{
+jql := jira.JQL{
     ProjectsIncl: [][]string{{"FOO"}},
     Raw: []string{
         "fixVersion = '1.0'",
@@ -175,7 +175,7 @@ jql := gojira.JQL{
 ### Labels
 
 ```go
-jql := gojira.JQL{
+jql := jira.JQL{
     LabelsIncl: [][]string{{"bug", "urgent"}},
 }
 // labels IN ('bug', 'urgent')
@@ -186,7 +186,7 @@ jql := gojira.JQL{
 Generate URL-encoded query string:
 
 ```go
-jql := gojira.JQL{
+jql := jira.JQL{
     ProjectsIncl: [][]string{{"FOO"}},
 }
 
@@ -199,8 +199,8 @@ qs := jql.QueryString()
 Store query metadata for tracking:
 
 ```go
-jql := gojira.JQL{
-    Meta: gojira.JQLMeta{
+jql := jira.JQL{
+    Meta: jira.JQLMeta{
         Name:        "Open Bugs",
         Description: "All open bugs in FOO project",
         QueryTime:   time.Now(),
@@ -218,7 +218,7 @@ For very long value lists that exceed Jira's limits:
 ```go
 values := []string{"KEY-1", "KEY-2", ..., "KEY-1000"}
 
-jqls := gojira.JQLStringsSimple(
+jqls := jira.JQLStringsSimple(
     "key",    // Field name
     false,    // Exclude (false = include)
     values,   // Values
@@ -242,15 +242,15 @@ import (
     "log"
     "time"
 
-    "github.com/grokify/gojira"
-    "github.com/grokify/gojira/rest"
+    "github.com/grokify/go-atlassian"
+    "github.com/grokify/go-atlassian/jira"
 )
 
 func main() {
     // Build JQL query
     oneMonthAgo := time.Now().AddDate(0, -1, 0)
 
-    jql := gojira.JQL{
+    jql := jira.JQL{
         ProjectsIncl: [][]string{{"FOO", "BAR"}},
         TypesIncl:    [][]string{{"Bug", "Task"}},
         StatusesExcl: [][]string{{"Done", "Closed"}},
@@ -261,7 +261,7 @@ func main() {
     fmt.Printf("JQL: %s\n", query)
 
     // Use with client
-    client, err := rest.NewClientFromBasicAuth(
+    client, err := jira.NewClientFromBasicAuth(
         "https://your-instance.atlassian.net",
         "your-email@example.com",
         "your-api-token",

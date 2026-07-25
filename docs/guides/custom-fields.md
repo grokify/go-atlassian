@@ -1,6 +1,6 @@
 # Working with Custom Fields
 
-Custom fields are user-defined fields in Jira that extend the default issue schema. This guide covers how to discover, use, and manage custom fields with gojira.
+Custom fields are user-defined fields in Jira that extend the default issue schema. This guide covers how to discover, use, and manage custom fields with go-atlassian.
 
 ## Understanding Custom Field IDs
 
@@ -120,7 +120,7 @@ Different custom field types require different value formats:
 ### Get Custom Fields
 
 ```go
-import "github.com/grokify/gojira/rest"
+import "github.com/grokify/go-atlassian/jira"
 
 // Get all custom fields
 fields, err := client.CustomFieldAPI.GetCustomFields()
@@ -213,7 +213,7 @@ In SDK code, create the client with custom field caching:
 
 ```go
 // Load custom fields once during client creation
-client, err := rest.NewClientFromBasicAuth(url, user, token, true)
+client, err := jira.NewClientFromBasicAuth(url, user, token, true)
 // client.CustomFieldSet is now populated
 ```
 

@@ -1,15 +1,15 @@
 # Client
 
-The `rest.Client` provides access to the Jira REST API. It wraps the [go-jira](https://github.com/andygrunwald/go-jira) library with additional utilities.
+The `jira.Client` provides access to the Jira REST API. It wraps the [go-jira](https://github.com/andygrunwald/go-jira) library with additional utilities.
 
 ## Creating a Client
 
 ### From Direct Credentials
 
 ```go
-import "github.com/grokify/gojira/rest"
+import "github.com/grokify/go-atlassian/jira"
 
-client, err := rest.NewClientFromBasicAuth(
+client, err := jira.NewClientFromBasicAuth(
     "https://your-instance.atlassian.net", // Server URL
     "your-email@example.com",              // Username
     "your-api-token",                       // API token/password
@@ -23,7 +23,7 @@ if err != nil {
 ### From goauth Credentials File
 
 ```go
-client, err := rest.NewClientGoauthBasicAuthFile(
+client, err := jira.NewClientGoauthBasicAuthFile(
     "~/.config/goauth/credentials.json", // Credentials file path
     "jira-prod",                          // Account key
     false,                                 // Load custom fields
@@ -37,11 +37,11 @@ Create a helper to read from environment:
 ```go
 import (
     "os"
-    "github.com/grokify/gojira/rest"
+    "github.com/grokify/go-atlassian/jira"
 )
 
-func NewClientFromEnv() (*rest.Client, error) {
-    return rest.NewClientFromBasicAuth(
+func NewClientFromEnv() (*jira.Client, error) {
+    return jira.NewClientFromBasicAuth(
         os.Getenv("JIRA_URL"),
         os.Getenv("JIRA_USER"),
         os.Getenv("JIRA_TOKEN"),
@@ -55,7 +55,7 @@ func NewClientFromEnv() (*rest.Client, error) {
 Use goauth CLI for interactive account selection:
 
 ```go
-client, err := rest.NewClientFromGoauthCLI(
+client, err := jira.NewClientFromGoauthCLI(
     true,  // Include accounts on error
     false, // Load custom fields
 )
@@ -65,7 +65,7 @@ client, err := rest.NewClientFromGoauthCLI(
 
 ```go
 type Client struct {
-    Config         *gojira.Config
+    Config         *jira.Config
     HTTPClient     *http.Client
     JiraClient     *jira.Client
     Logger         *slog.Logger
@@ -152,7 +152,7 @@ Custom fields can be loaded during client initialization or later:
 
 ```go
 // Load during init
-client, err := rest.NewClientFromBasicAuth(url, user, token, true)
+client, err := jira.NewClientFromBasicAuth(url, user, token, true)
 
 // Or load later
 err := client.LoadCustomFields()
@@ -279,12 +279,12 @@ import (
     "fmt"
     "log"
 
-    "github.com/grokify/gojira/rest"
+    "github.com/grokify/go-atlassian/jira"
 )
 
 func main() {
     // Create client
-    client, err := rest.NewClientFromBasicAuth(
+    client, err := jira.NewClientFromBasicAuth(
         "https://your-instance.atlassian.net",
         "your-email@example.com",
         "your-api-token",

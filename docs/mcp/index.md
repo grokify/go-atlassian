@@ -1,6 +1,6 @@
 # MCP Server
 
-GoJira includes an MCP (Model Context Protocol) server that enables AI assistants like Claude to interact with Jira directly.
+go-atlassian includes an MCP (Model Context Protocol) server that enables AI assistants like Claude to interact with Jira directly.
 
 ## Overview
 
@@ -15,7 +15,7 @@ The MCP server (`gojira-mcp`) provides a stdio-based JSON-RPC interface that AI 
 ## Installation
 
 ```bash
-go install github.com/grokify/gojira/cmd/gojira-mcp@latest
+go install github.com/grokify/go-atlassian/cmd/gojira-mcp@latest
 ```
 
 ## Configuration

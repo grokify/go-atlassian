@@ -1,6 +1,6 @@
 # Authentication
 
-GoJira supports multiple authentication methods to connect to your Jira instance.
+go-atlassian supports multiple authentication methods to connect to your Jira instance.
 
 ## Authentication Priority
 
@@ -32,7 +32,7 @@ This is the recommended method for:
 
 ## Method 2: goauth Credentials File
 
-GoJira integrates with [goauth](https://github.com/grokify/goauth) for credential management.
+go-atlassian integrates with [goauth](https://github.com/grokify/goauth) for credential management.
 
 ### Default Location
 

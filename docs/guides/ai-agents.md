@@ -1,8 +1,8 @@
 # AI Agents Guide
 
-GoJira is designed to work well with AI agents like Claude Code. This guide covers best practices for AI-agent workflows.
+go-atlassian is designed to work well with AI agents like Claude Code. This guide covers best practices for AI-agent workflows.
 
-## Why GoJira for AI Agents?
+## Why go-atlassian for AI Agents?
 
 1. **Non-interactive operation**: All auth via environment variables or files
 2. **Structured output**: JSON and TOON formats for reliable parsing
@@ -146,12 +146,12 @@ import (
     "fmt"
     "os"
 
-    "github.com/grokify/gojira/rest"
+    "github.com/grokify/go-atlassian/jira"
 )
 
 func main() {
     // Create client from environment
-    client, err := rest.NewClientFromBasicAuth(
+    client, err := jira.NewClientFromBasicAuth(
         os.Getenv("JIRA_URL"),
         os.Getenv("JIRA_USER"),
         os.Getenv("JIRA_TOKEN"),

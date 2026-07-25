@@ -5,7 +5,7 @@
 Install the `gojira` command-line tool:
 
 ```bash
-go install github.com/grokify/gojira/cmd/gojira@latest
+go install github.com/grokify/go-atlassian/cmd/gojira@latest
 ```
 
 Verify the installation:
@@ -16,19 +16,19 @@ gojira version
 
 ## SDK Installation
 
-Add GoJira as a dependency to your Go project:
+Add go-atlassian as a dependency to your Go project:
 
 ```bash
-go get github.com/grokify/gojira
+go get github.com/grokify/go-atlassian
 ```
 
 Import the packages you need:
 
 ```go
 import (
-    "github.com/grokify/gojira"       // JQL builder, config
-    "github.com/grokify/gojira/rest"  // REST API client
-    "github.com/grokify/gojira/xml"   // XML parser
+    "github.com/grokify/go-atlassian"       // JQL builder, config
+    "github.com/grokify/go-atlassian/jira"  // REST API client
+    "github.com/grokify/go-atlassian/xml"   // XML parser
 )
 ```
 

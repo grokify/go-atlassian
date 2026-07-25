@@ -1,6 +1,6 @@
-# GoJira
+# go-atlassian
 
-GoJira is a Go SDK and CLI for Jira that provides:
+go-atlassian is a Go SDK and CLI for Jira that provides:
 
 - **REST API client** (`rest/`) - wrapper around [go-jira](https://github.com/andygrunwald/go-jira) with additional utilities
 - **XML parser** (`xml/`) - parse Jira XML exports when API access is unavailable
@@ -18,10 +18,10 @@ GoJira is a Go SDK and CLI for Jira that provides:
 
 | Package | Description | Dependencies |
 |---------|-------------|--------------|
-| `gojira` | JQL builder, config, constants | None (lightweight) |
+| root | JQL builder, config, constants | None (lightweight) |
 | `gojira/rest` | REST API client | go-jira SDK |
-| `gojira/xml` | XML export parser | None |
-| `gojira/web` | URL helpers | None |
+| `go-atlassian/xml` | XML export parser | None |
+| `go-atlassian/web` | URL helpers | None |
 
 ## Quick Example
 
@@ -41,9 +41,9 @@ GoJira is a Go SDK and CLI for Jira that provides:
 === "SDK"
 
     ```go
-    import "github.com/grokify/gojira/rest"
+    import "github.com/grokify/go-atlassian/jira"
 
-    client, err := rest.NewClientFromBasicAuth(
+    client, err := jira.NewClientFromBasicAuth(
         "https://your-instance.atlassian.net",
         "your-email@example.com",
         "your-api-token",
@@ -66,4 +66,4 @@ GoJira is a Go SDK and CLI for Jira that provides:
 - [Installation](installation.md) - Install the CLI and SDK
 - [Quick Start](quickstart.md) - Get up and running in minutes
 - [CLI Reference](cli/index.md) - Full command documentation
-- [SDK Guide](sdk/index.md) - Using GoJira as a library
+- [SDK Guide](sdk/index.md) - Using go-atlassian as a library

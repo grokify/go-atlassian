@@ -1,6 +1,6 @@
-# GoJira Roadmap
+# go-atlassian Roadmap
 
-This document outlines planned features and enhancements for GoJira.
+This document outlines planned features and enhancements for go-atlassian.
 
 ## v0.33.0 - CLI & SDK Enhancements (Completed)
 

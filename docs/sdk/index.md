@@ -1,15 +1,15 @@
 # SDK Guide
 
-GoJira provides a Go SDK for interacting with the Jira REST API. The SDK is organized into packages with clear dependency boundaries.
+go-atlassian provides a Go SDK for interacting with the Jira REST API. The SDK is organized into packages with clear dependency boundaries.
 
 ## Package Structure
 
 | Package | Import | Description |
 |---------|--------|-------------|
-| `gojira` | `github.com/grokify/gojira` | JQL builder, config, constants (no external deps) |
-| `rest` | `github.com/grokify/gojira/rest` | REST API client (requires go-jira) |
-| `xml` | `github.com/grokify/gojira/xml` | XML export parser (no external deps) |
-| `web` | `github.com/grokify/gojira/web` | URL helpers (no external deps) |
+| root | `github.com/grokify/go-atlassian` | JQL builder, config, constants (no external deps) |
+| `jira` | `github.com/grokify/go-atlassian/jira` | REST API client (requires go-jira) |
+| `xml` | `github.com/grokify/go-atlassian/xml` | XML export parser (no external deps) |
+| `web` | `github.com/grokify/go-atlassian/web` | URL helpers (no external deps) |
 
 ## Quick Start
 
@@ -20,12 +20,12 @@ import (
     "fmt"
     "log"
 
-    "github.com/grokify/gojira/rest"
+    "github.com/grokify/go-atlassian/jira"
 )
 
 func main() {
     // Create client with basic auth
-    client, err := rest.NewClientFromBasicAuth(
+    client, err := jira.NewClientFromBasicAuth(
         "https://your-instance.atlassian.net",
         "your-email@example.com",
         "your-api-token",
@@ -52,7 +52,7 @@ func main() {
 
 ### Client
 
-The `rest.Client` is your entry point to the API. It provides access to service APIs:
+The `jira.Client` is your entry point to the API. It provides access to service APIs:
 
 - `client.IssueAPI` - Issue operations (search, get, update)
 - `client.CustomFieldAPI` - Custom field operations (including duplicate name handling)
@@ -63,7 +63,7 @@ See [Client](client.md) for details.
 
 ### Issues
 
-Issues are returned as `rest.Issues` (a slice of `jira.Issue`). Use `IssuesSet` for advanced operations:
+Issues are returned as `jira.Issues` (a slice of `jira.Issue`). Use `IssuesSet` for advanced operations:
 
 ```go
 issuesSet, err := issues.IssuesSet(nil)
@@ -82,9 +82,9 @@ See [Issues](issues.md) for details.
 The root package provides a JQL builder for constructing queries programmatically:
 
 ```go
-import "github.com/grokify/gojira"
+import "github.com/grokify/go-atlassian"
 
-jql := gojira.JQL{
+jql := jira.JQL{
     ProjectsIncl: [][]string{{"FOO", "BAR"}},
     StatusesIncl: [][]string{{"Open", "In Progress"}},
 }
@@ -99,17 +99,17 @@ See [JQL Builder](jql.md) for details.
 
 ```go
 // Option 1: Direct credentials
-client, err := rest.NewClientFromBasicAuth(url, user, token, false)
+client, err := jira.NewClientFromBasicAuth(url, user, token, false)
 
 // Option 2: From goauth credentials file
-client, err := rest.NewClientGoauthBasicAuthFile(
+client, err := jira.NewClientGoauthBasicAuthFile(
     "~/.config/goauth/credentials.json",
     "jira-prod",
     false,
 )
 
 // Option 3: Interactive selection from goauth CLI
-client, err := rest.NewClientFromGoauthCLI(true, false)
+client, err := jira.NewClientFromGoauthCLI(true, false)
 ```
 
 ## Error Handling

@@ -1,8 +1,8 @@
-# gojira v1.0 Product Requirements Document
+# go-atlassian v1.0 Product Requirements Document
 
 ## Overview
 
-This document outlines the requirements and considerations for the gojira v1.0 release, focusing on API stability, consistency, and developer experience.
+This document outlines the requirements and considerations for the go-atlassian v1.0 release, focusing on API stability, consistency, and developer experience.
 
 ## Goals
 
@@ -47,7 +47,7 @@ The following breaking changes must be completed before v1.0:
 
 | Item | Status | Description |
 |------|--------|-------------|
-| Consolidate CLI IssueMeta | ✅ Done | CLI now uses shared `rest.IssueOutput` |
+| Consolidate CLI IssueMeta | ✅ Done | CLI now uses shared `jira.IssueOutput` |
 | Document custom field types | 🔲 Pending | Clarify `CustomField` vs `IssueCustomField` vs `CustomFieldOption` |
 
 ### P2 - Nice to Have (Post v1)

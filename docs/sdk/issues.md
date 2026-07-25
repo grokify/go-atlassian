@@ -4,28 +4,28 @@ The SDK provides several types for working with Jira issues.
 
 ## Issue Types
 
-### rest.Issues
+### jira.Issues
 
 A slice of `jira.Issue` from the go-jira library:
 
 ```go
 issues, err := client.IssueAPI.SearchIssues("project = FOO", false)
-// issues is rest.Issues ([]jira.Issue)
+// issues is jira.Issues ([]jira.Issue)
 
 for _, issue := range issues {
     fmt.Printf("%s: %s\n", issue.Key, issue.Fields.Summary)
 }
 ```
 
-### rest.IssueMore
+### jira.IssueMore
 
 A wrapper around `jira.Issue` with convenience methods:
 
 ```go
-import "github.com/grokify/gojira/rest"
+import "github.com/grokify/go-atlassian/jira"
 
 issue := issues[0]
-im := rest.NewIssueMore(&issue)
+im := jira.NewIssueMore(&issue)
 
 // Convenience accessors
 key := im.Key()
@@ -36,7 +36,7 @@ assignee := im.AssigneeName()
 resolution := im.Resolution()
 ```
 
-### rest.IssuesSet
+### jira.IssuesSet
 
 A structured set of issues with aggregation and filtering:
 
@@ -92,7 +92,7 @@ issue, err := client.IssueAPI.Issue(ctx, "FOO-123", nil)
 ### With Options
 
 ```go
-opts := &rest.GetQueryOptions{
+opts := &jira.GetQueryOptions{
     ExpandChangelog: true,  // Include issue history
 }
 issue, err := client.IssueAPI.Issue(ctx, "FOO-123", opts)
@@ -135,7 +135,7 @@ open := issuesSet.FilterByStatus("Open")
 bugs := issuesSet.FilterByType("Bug")
 
 // Filter by custom criteria
-filtered := issuesSet.Filter(func(im *rest.IssueMore) bool {
+filtered := issuesSet.Filter(func(im *jira.IssueMore) bool {
     return im.Priority() == "High"
 })
 ```
@@ -173,7 +173,7 @@ if issuesSet.Parents != nil {
 ### From JSON
 
 ```go
-issuesSet, err := rest.IssuesSetReadFileJSON("backup.json")
+issuesSet, err := jira.IssuesSetReadFileJSON("backup.json")
 if err != nil {
     log.Fatal(err)
 }
@@ -211,11 +211,11 @@ import (
     "fmt"
     "log"
 
-    "github.com/grokify/gojira/rest"
+    "github.com/grokify/go-atlassian/jira"
 )
 
 func main() {
-    client, err := rest.NewClientFromBasicAuth(
+    client, err := jira.NewClientFromBasicAuth(
         "https://your-instance.atlassian.net",
         "your-email@example.com",
         "your-api-token",

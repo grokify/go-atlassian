@@ -294,7 +294,7 @@ require (
 |------|------------|
 | Dashforge API changes | Pin to specific version, abstract IR types |
 | Large report performance | Add caching, pagination, progress indicators |
-| Complex JQL handling | Leverage existing GoJira JQL support |
+| Complex JQL handling | Leverage existing go-atlassian JQL support |
 | PDF rendering issues | Make PDF optional, provide HTML as default |
 
 ---

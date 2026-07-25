@@ -70,28 +70,28 @@ gojira/
 
 ```go
 // Before
-import "github.com/grokify/gojira/jirarest"
-client, err := jirarest.NewClientFromBasicAuth(...)
+import "github.com/grokify/go-atlassian/jirarest"
+client, err := jirajira.NewClientFromBasicAuth(...)
 
 // After
-import "github.com/grokify/gojira/rest"
-client, err := rest.NewClientFromBasicAuth(...)
+import "github.com/grokify/go-atlassian/rest"
+client, err := jira.NewClientFromBasicAuth(...)
 ```
 
 ```go
 // Before
-import "github.com/grokify/gojira/jiraxml"
+import "github.com/grokify/go-atlassian/jiraxml"
 
 // After
-import "github.com/grokify/gojira/xml"
+import "github.com/grokify/go-atlassian/xml"
 ```
 
 ```go
 // Before
-import "github.com/grokify/gojira/jiraweb"
+import "github.com/grokify/go-atlassian/jiraweb"
 
 // After
-import "github.com/grokify/gojira/web"
+import "github.com/grokify/go-atlassian/web"
 ```
 
 ## Notes

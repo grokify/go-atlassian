@@ -1,8 +1,8 @@
-# gojira v1.0 Technical Requirements Document
+# go-atlassian v1.0 Technical Requirements Document
 
 ## Overview
 
-This document provides technical details and implementation guidance for the gojira v1.0 release.
+This document provides technical details and implementation guidance for the go-atlassian v1.0 release.
 
 ## Current State Analysis
 
@@ -21,7 +21,7 @@ This document provides technical details and implementation guidance for the goj
 
 - **Total Go files**: ~50 files
 - **Total lines**: ~12,000 lines (non-test)
-- **Packages**: gojira, rest, rest/apiv3, core, xml, mcpserver, web, cmd/*
+- **Packages**: root, jira, jira/apiv3, core, xml, mcpserver, web, cmd/*
 
 ## Technical Debt Items
 
@@ -140,7 +140,7 @@ type CommentGetter interface {
 | `CustomFields` | rest | Slice of CustomField with helper methods |
 | `IssueCustomField` | rest | Field value on an issue (id, self, value) |
 | `CustomFieldOption` | rest/apiv3 | Dropdown/select option |
-| `CustomFieldID` | gojira | Type alias for int (legacy?) |
+| `CustomFieldID` | root | Type alias for int (legacy?) |
 
 **Recommendation**: Add documentation comments clarifying when to use each type.
 

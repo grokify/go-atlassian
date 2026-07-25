@@ -4,7 +4,7 @@
 
 ```
 ┌─────────────────────────────────────────────────────────────────────┐
-│                         GoJira Report System                         │
+│                         go-atlassian Report System                         │
 │                                                                      │
 │  ┌──────────────────┐    ┌──────────────────┐    ┌───────────────┐  │
 │  │  Report Schema   │    │  Report Engine   │    │  CLI Commands │  │
@@ -13,7 +13,7 @@
 │                                   │                                  │
 │                                   ▼                                  │
 │  ┌──────────────────────────────────────────────────────────────┐   │
-│  │                    GoJira SDK (rest package)                  │   │
+│  │                    go-atlassian SDK (jira package)                  │   │
 │  │  ┌─────────┐ ┌─────────┐ ┌─────────┐ ┌─────────┐ ┌─────────┐ │   │
 │  │  │ Issue   │ │ Board   │ │ Sprint  │ │ Worklog │ │ Custom  │ │   │
 │  │  │ Service │ │ Service │ │ Service │ │ Reports │ │ Fields  │ │   │
@@ -41,7 +41,7 @@
 ## Package Structure
 
 ```
-gojira/
+go-atlassian/
 ├── report/                      # New package for report system
 │   ├── definition.go            # Report definition types
 │   ├── schema.go                # JSON Schema for validation
@@ -275,18 +275,18 @@ import (
     "context"
     "fmt"
 
-    "github.com/grokify/gojira/rest"
+    "github.com/grokify/go-atlassian/jira"
 )
 
 // Engine executes report definitions and produces Dashforge IR.
 type Engine struct {
-    client     *rest.Client
+    client     *jira.Client
     cache      *Cache
     processors map[SectionType]SectionProcessor
 }
 
 // NewEngine creates a new report engine.
-func NewEngine(client *rest.Client) *Engine {
+func NewEngine(client *jira.Client) *Engine {
     e := &Engine{
         client:     client,
         cache:      NewCache(),
@@ -492,7 +492,7 @@ import (
     "html/template"
     "io"
 
-    "github.com/grokify/gojira/report"
+    "github.com/grokify/go-atlassian/report"
 )
 
 //go:embed viewer/*
@@ -611,7 +611,7 @@ func init() {
 
 func TestEngineExecute(t *testing.T) {
     // Mock Jira client
-    client := &rest.Client{...}
+    client := &jira.Client{...}
     engine := NewEngine(client)
 
     def := &Definition{
@@ -669,5 +669,5 @@ func TestFullReportGeneration(t *testing.T) {
 
 1. **JQL Injection**: Validate and sanitize user-provided JQL
 2. **Variable Validation**: Validate variable values against schema
-3. **Authentication**: Use existing GoJira authentication mechanisms
+3. **Authentication**: Use existing go-atlassian authentication mechanisms
 4. **Export Security**: Sanitize HTML output to prevent XSS

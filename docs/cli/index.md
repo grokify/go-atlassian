@@ -5,7 +5,7 @@ The `gojira` command-line interface provides commands for searching, retrieving,
 ## Installation
 
 ```bash
-go install github.com/grokify/gojira/cmd/gojira@latest
+go install github.com/grokify/go-atlassian/cmd/gojira@latest
 ```
 
 ## Commands

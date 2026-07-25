@@ -1,6 +1,6 @@
 # Quick Start
 
-Get up and running with GoJira in minutes.
+Get up and running with go-atlassian in minutes.
 
 ## Prerequisites
 
@@ -11,7 +11,7 @@ Get up and running with GoJira in minutes.
 ## 1. Install the CLI
 
 ```bash
-go install github.com/grokify/gojira/cmd/gojira@latest
+go install github.com/grokify/go-atlassian/cmd/gojira@latest
 ```
 
 ## 2. Configure Authentication
@@ -65,7 +65,7 @@ gojira stats --jql "project = FOO" --by assignee
 
 ## Output Formats
 
-GoJira supports three output formats:
+go-atlassian supports three output formats:
 
 | Format | Flag | Use Case |
 |--------|------|----------|

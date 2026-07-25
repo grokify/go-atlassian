@@ -1,4 +1,4 @@
-# GoJira
+# go-atlassian
 
 [![Go CI][go-ci-svg]][go-ci-url]
 [![Go Lint][go-lint-svg]][go-lint-url]
@@ -8,26 +8,26 @@
 [![Visualization][viz-svg]][viz-url]
 [![License][license-svg]][license-url]
 
- [go-ci-svg]: https://github.com/grokify/gojira/actions/workflows/go-ci.yaml/badge.svg?branch=main
- [go-ci-url]: https://github.com/grokify/gojira/actions/workflows/go-ci.yaml
- [go-lint-svg]: https://github.com/grokify/gojira/actions/workflows/go-lint.yaml/badge.svg?branch=main
- [go-lint-url]: https://github.com/grokify/gojira/actions/workflows/go-lint.yaml
- [go-sast-svg]: https://github.com/grokify/gojira/actions/workflows/go-sast-codeql.yaml/badge.svg?branch=main
- [go-sast-url]: https://github.com/grokify/gojira/actions/workflows/go-sast-codeql.yaml
- [docs-godoc-svg]: https://pkg.go.dev/badge/github.com/grokify/gojira
- [docs-godoc-url]: https://pkg.go.dev/github.com/grokify/gojira
+ [go-ci-svg]: https://github.com/grokify/go-atlassian/actions/workflows/go-ci.yaml/badge.svg?branch=main
+ [go-ci-url]: https://github.com/grokify/go-atlassian/actions/workflows/go-ci.yaml
+ [go-lint-svg]: https://github.com/grokify/go-atlassian/actions/workflows/go-lint.yaml/badge.svg?branch=main
+ [go-lint-url]: https://github.com/grokify/go-atlassian/actions/workflows/go-lint.yaml
+ [go-sast-svg]: https://github.com/grokify/go-atlassian/actions/workflows/go-sast-codeql.yaml/badge.svg?branch=main
+ [go-sast-url]: https://github.com/grokify/go-atlassian/actions/workflows/go-sast-codeql.yaml
+ [docs-godoc-svg]: https://pkg.go.dev/badge/github.com/grokify/go-atlassian
+ [docs-godoc-url]: https://pkg.go.dev/github.com/grokify/go-atlassian
  [docs-site-svg]: https://img.shields.io/badge/docs-MkDocs-blue.svg
- [docs-site-url]: https://grokify.github.io/gojira/
+ [docs-site-url]: https://grokify.github.io/go-atlassian/
  [viz-svg]: https://img.shields.io/badge/visualizaton-Go-blue.svg
  [viz-url]: https://mango-dune-07a8b7110.1.azurestaticapps.net/?repo=grokify%2Fgojira
- [loc-svg]: https://tokei.rs/b1/github/grokify/gojira
- [repo-url]: https://github.com/grokify/gojira
+ [loc-svg]: https://tokei.rs/b1/github/grokify/go-atlassian
+ [repo-url]: https://github.com/grokify/go-atlassian
  [license-svg]: https://img.shields.io/badge/license-MIT-blue.svg
- [license-url]: https://github.com/grokify/gojira/blob/main/LICENSE
+ [license-url]: https://github.com/grokify/go-atlassian/blob/main/LICENSE
 
-GoJira is a Go SDK and CLI for Jira that provides:
+go-atlassian is a Go SDK and CLI for Jira that provides:
 
-- **REST API client** (`rest/`) - wrapper around [`go-jira`](https://github.com/andygrunwald/go-jira) with additional utilities
+- **REST API client** (`jira/`) - wrapper around [`go-jira`](https://github.com/andygrunwald/go-jira) with additional utilities
 - **XML parser** (`xml/`) - parse Jira XML exports when API access is unavailable
 - **JQL builder** (root package) - programmatically construct JQL queries
 - **CLI tool** (`cmd/gojira/`) - command-line interface optimized for AI agents and humans
@@ -37,13 +37,13 @@ GoJira is a Go SDK and CLI for Jira that provides:
 
 ```bash
 # Install the CLI
-go install github.com/grokify/gojira/cmd/gojira@latest
+go install github.com/grokify/go-atlassian/cmd/gojira@latest
 
 # Install the MCP server (for AI assistants)
-go install github.com/grokify/gojira/cmd/gojira-mcp@latest
+go install github.com/grokify/go-atlassian/cmd/gojira-mcp@latest
 
 # Use as a library
-go get github.com/grokify/gojira
+go get github.com/grokify/go-atlassian
 ```
 
 ## Quick Start
@@ -108,15 +108,15 @@ The MCP server enables AI assistants like Claude to interact with Jira:
 
 Available tools: `jira_get_issue`, `jira_search`, `jira_create_issue`, `jira_update_issue`, `jira_add_comment`, `jira_get_transitions`, `jira_transition_issue`, `jira_get_comments`, `jira_get_projects`
 
-See [MCP Server documentation](https://grokify.github.io/gojira/mcp/) for details.
+See [MCP Server documentation](https://grokify.github.io/go-atlassian/mcp/) for details.
 
 ### Library Usage
 
 ```go
-import "github.com/grokify/gojira/rest"
+import "github.com/grokify/go-atlassian/jira"
 
 // Create client with basic auth
-client, err := rest.NewClientFromBasicAuth(
+client, err := jira.NewClientFromBasicAuth(
     "https://your-instance.atlassian.net",
     "your-email@example.com",
     "your-api-token",
@@ -133,7 +133,7 @@ if err != nil {
 }
 
 for _, issue := range issues {
-    im := rest.NewIssueMore(&issue)
+    im := jira.NewIssueMore(&issue)
     fmt.Printf("%s: %s [%s]\n", im.Key(), im.Summary(), im.Status())
 }
 ```
@@ -141,10 +141,10 @@ for _, issue := range issues {
 ### JQL Builder
 
 ```go
-import "github.com/grokify/gojira"
+import "github.com/grokify/go-atlassian"
 
 // Build JQL programmatically
-jql := gojira.JQL{
+jql := jira.JQL{
     ProjectsIncl: [][]string{{"FOO"}},
     StatusesIncl: [][]string{{"Open", "In Progress"}},
 }
@@ -155,22 +155,22 @@ query := jql.String() // "project = 'FOO' AND status IN ('Open', 'In Progress')"
 
 | Package | Description | Dependencies |
 |---------|-------------|--------------|
-| `gojira` | JQL builder, config, constants | None (lightweight) |
-| `gojira/rest` | REST API client | go-jira SDK |
-| `gojira/core` | Shared types for issue creation | yaml.v3 |
-| `gojira/mcpserver` | MCP server implementation | JSON-RPC |
-| `gojira/xml` | XML export parser | None |
-| `gojira/web` | URL helpers | None |
+| root | JQL builder, config, constants | None (lightweight) |
+| `go-atlassian/jira` | REST API client | go-jira SDK |
+| `go-atlassian/core` | Shared types for issue creation | yaml.v3 |
+| `go-atlassian/mcpserver` | MCP server implementation | JSON-RPC |
+| `go-atlassian/xml` | XML export parser | None |
+| `go-atlassian/web` | URL helpers | None |
 
 ## Documentation
 
-Full documentation is available at **[grokify.github.io/gojira](https://grokify.github.io/gojira/)**:
+Full documentation is available at **[grokify.github.io/go-atlassian](https://grokify.github.io/go-atlassian/)**:
 
-- [CLI Reference](https://grokify.github.io/gojira/cli/) - All commands and flags
-- [MCP Server](https://grokify.github.io/gojira/mcp/) - Setup for AI assistants
-- [SDK Guide](https://grokify.github.io/gojira/sdk/) - Using GoJira as a library
-- [AI Agents Guide](https://grokify.github.io/gojira/guides/ai-agents/) - Integration with LLMs
-- [JQL Examples](https://grokify.github.io/gojira/guides/jql-examples/) - Common query patterns
+- [CLI Reference](https://grokify.github.io/go-atlassian/cli/) - All commands and flags
+- [MCP Server](https://grokify.github.io/go-atlassian/mcp/) - Setup for AI assistants
+- [SDK Guide](https://grokify.github.io/go-atlassian/sdk/) - Using go-atlassian as a library
+- [AI Agents Guide](https://grokify.github.io/go-atlassian/guides/ai-agents/) - Integration with LLMs
+- [JQL Examples](https://grokify.github.io/go-atlassian/guides/jql-examples/) - Common query patterns
 
 ## Use Cases
 
