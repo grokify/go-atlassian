@@ -6,13 +6,17 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="Go SDK and CLI for Jira">
+        <meta name="description" content="Go SDK and CLI for Atlassian products (Jira and Confluence)">
       
       
       
         <link rel="canonical" href="https://grokify.github.io/go-atlassian/guides/troubleshooting/">
       
       
+        <link rel="prev" href="../jql-examples/">
+      
+      
+        <link rel="next" href="../../releases/v0.33.0/">
       
       
         
@@ -23,7 +27,7 @@
     
     
       
-        <title>Troubleshooting Guide - Go-Atlassian</title>
+        <title>Troubleshooting - Go-Atlassian</title>
       
     
     
@@ -108,7 +112,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Troubleshooting Guide
+              Troubleshooting
             
           </span>
         </div>
@@ -318,10 +322,12 @@
   
   
   
+    
+  
   
     
     
-      <li class="md-tabs__item">
+      <li class="md-tabs__item md-tabs__item--active">
         <a href="../ai-agents/" class="md-tabs__link">
           
   
@@ -342,7 +348,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../releases/v0.32.0/" class="md-tabs__link">
+        <a href="../../releases/v0.33.0/" class="md-tabs__link">
           
   
   
@@ -1150,28 +1156,31 @@
       
   
   
+    
   
   
+  
     
     
     
     
+      
+        
+        
       
       
         
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
         
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" checked>
         
           
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6" >
-        
-          
-          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
             
   
   
@@ -1189,7 +1198,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_6">
             <span class="md-nav__icon md-icon"></span>
             
@@ -1235,6 +1244,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../custom-fields/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Custom Fields
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../jql-examples/" class="md-nav__link">
         
   
@@ -1251,6 +1288,348 @@
   
 
       </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Troubleshooting
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Troubleshooting
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#authentication-issues" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Authentication Issues
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Authentication Issues">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#error-authentication-failed" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Error: "authentication failed"
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#error-401-unauthorized" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Error: "401 Unauthorized"
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#error-403-forbidden" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Error: "403 Forbidden"
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#issue-operations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Issue Operations
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Issue Operations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#error-issue-not-found-for-valid-issue-key" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Error: "issue not found" for valid issue key
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#error-field-not-found-when-creating-issues" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Error: "field not found" when creating issues
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#error-multiple-custom-fields-found-with-name" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Error: "multiple custom fields found with name"
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#jql-issues" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        JQL Issues
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="JQL Issues">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#error-jql-parse-error" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Error: "JQL parse error"
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#error-field-does-not-exist" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Error: "field does not exist"
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#performance-issues" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Performance Issues
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Performance Issues">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#slow-search-queries" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Slow search queries
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#timeout-errors" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Timeout errors
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#custom-fields" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Custom Fields
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Custom Fields">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#finding-the-correct-custom-field-id" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Finding the correct custom field ID
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#custom-field-not-appearing-in-results" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Custom field not appearing in results
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mcp-server-issues" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        MCP Server Issues
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="MCP Server Issues">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#error-missing-required-environment-variables" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Error: "missing required environment variables"
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mcp-server-not-responding" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        MCP server not responding
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#getting-help" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Getting Help
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -1316,6 +1695,34 @@
 
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../releases/v0.33.0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    v0.33.0
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
             
               
                 

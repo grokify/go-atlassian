@@ -6,13 +6,17 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="Go SDK and CLI for Jira">
+        <meta name="description" content="Go SDK and CLI for Atlassian products (Jira and Confluence)">
       
       
       
         <link rel="canonical" href="https://grokify.github.io/go-atlassian/guides/custom-fields/">
       
       
+        <link rel="prev" href="../ai-agents/">
+      
+      
+        <link rel="next" href="../jql-examples/">
       
       
         
@@ -23,7 +27,7 @@
     
     
       
-        <title>Working with Custom Fields - Go-Atlassian</title>
+        <title>Custom Fields - Go-Atlassian</title>
       
     
     
@@ -108,7 +112,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Working with Custom Fields
+              Custom Fields
             
           </span>
         </div>
@@ -318,10 +322,12 @@
   
   
   
+    
+  
   
     
     
-      <li class="md-tabs__item">
+      <li class="md-tabs__item md-tabs__item--active">
         <a href="../ai-agents/" class="md-tabs__link">
           
   
@@ -342,7 +348,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../releases/v0.32.0/" class="md-tabs__link">
+        <a href="../../releases/v0.33.0/" class="md-tabs__link">
           
   
   
@@ -1150,28 +1156,31 @@
       
   
   
+    
   
   
+  
     
     
     
     
+      
+        
+        
       
       
         
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
         
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" checked>
         
           
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6" >
-        
-          
-          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
             
   
   
@@ -1189,7 +1198,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_6">
             <span class="md-nav__icon md-icon"></span>
             
@@ -1232,6 +1241,408 @@
                 
   
   
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Custom Fields
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Custom Fields
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#understanding-custom-field-ids" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Understanding Custom Field IDs
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#discovering-custom-fields" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Discovering Custom Fields
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Discovering Custom Fields">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#list-all-custom-fields" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        List All Custom Fields
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filter-by-project" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Filter by Project
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#find-required-fields" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Find Required Fields
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#identify-duplicate-names" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Identify Duplicate Names
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#using-custom-fields-in-jql" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Using Custom Fields in JQL
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#custom-fields-in-issue-creation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Custom Fields in Issue Creation
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Custom Fields in Issue Creation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#yaml-format" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        YAML Format
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#validate-before-creating" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Validate Before Creating
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#field-type-formats" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Field Type Formats
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sdk-usage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SDK Usage
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="SDK Usage">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#get-custom-fields" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Get Custom Fields
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#find-fields-with-suggestions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Find Fields with Suggestions
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-project-specific-fields" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Get Project-Specific Fields
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#map-names-to-ids" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Map Names to IDs
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#best-practices" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Best Practices
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Best Practices">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-use-field-ids-not-names" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Use Field IDs, Not Names
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-validate-field-availability" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Validate Field Availability
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-handle-duplicates-gracefully" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Handle Duplicates Gracefully
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-cache-field-metadata" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Cache Field Metadata
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-document-your-field-mappings" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Document Your Field Mappings
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#common-issues" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Common Issues
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Common Issues">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#field-not-found-error" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        "Field not found" Error
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#multiple-fields-with-same-name" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Multiple Fields with Same Name
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wrong-value-format" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Wrong Value Format
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#related-documentation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Related Documentation
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
   
   
     <li class="md-nav__item">
@@ -1243,6 +1654,34 @@
     
   
     JQL Examples
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../troubleshooting/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Troubleshooting
   
 
     
@@ -1316,6 +1755,34 @@
 
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../releases/v0.33.0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    v0.33.0
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
             
               
                 
