@@ -7,6 +7,27 @@
   "maintainers": ["grokify", "johncwang@gmail.com"],
   "releases": [
     {
+      "version": "v0.33.0",
+      "date": "2026-08-24",
+      "highlights": [
+        {
+          "description": "New omniroadmap provider adapter for Jira Product Discovery (JPD) Ideas, implementing omniroadmap-core's provider.Provider"
+        }
+      ],
+      "added": [
+        {
+          "description": "New `omniroadmap` package: omniroadmap-core provider.Provider adapter using go-atlassian's own *jira.Client, scoped to JPD Ideas (ordinary Jira issues in a JPD-specific issue type, reachable via the standard public REST API)",
+          "commit": "fa3c339"
+        }
+      ],
+      "dependencies": [
+        {
+          "description": "Add github.com/grokify/omniroadmap-core v0.1.0; bump mogo, goauth, gocharts, and other transitive dependencies via go mod tidy",
+          "commit": "fa3c339"
+        }
+      ]
+    },
+    {
       "version": "v0.32.0",
       "date": "2026-07-25",
       "highlights": [
