@@ -30,6 +30,7 @@ Go-Atlassian is a Go SDK and CLI for Atlassian products (Jira and Confluence) th
 - **Jira REST API client** (`jira/`) - wrapper around [`go-jira`](https://github.com/andygrunwald/go-jira) with additional utilities
 - **Confluence REST API client** (`confluence/`) - page reading, writing, and Storage Format IR
 - **Report engine** (`report/`) - configurable report definitions with Dashforge Dashboard IR output
+- **omniroadmap provider** (`omniroadmap/`) - [omniroadmap-core](https://github.com/grokify/omniroadmap-core) `provider.Provider` adapter for Jira Product Discovery (JPD) Ideas
 - **XML parser** (`xml/`) - parse Jira XML exports when API access is unavailable
 - **JQL builder** (root package) - programmatically construct JQL queries
 - **CLI tool** (`cmd/gojira/`) - command-line interface optimized for AI agents and humans
@@ -161,6 +162,7 @@ query := jql.String() // "project = 'FOO' AND status IN ('Open', 'In Progress')"
 | `go-atlassian/jira` | Jira REST API client | go-jira SDK |
 | `go-atlassian/confluence` | Confluence REST API client with Storage Format IR | go-atlassian/jira |
 | `go-atlassian/report` | Configurable report engine with Dashforge Dashboard IR output | go-atlassian/jira |
+| `go-atlassian/omniroadmap` | omniroadmap-core `provider.Provider` adapter for Jira Product Discovery (JPD) Ideas | go-atlassian/jira, omniroadmap-core |
 | `go-atlassian/core` | Shared types for issue creation | yaml.v3 |
 | `go-atlassian/mcpserver` | MCP server implementation | JSON-RPC |
 | `go-atlassian/xml` | XML export parser | None |

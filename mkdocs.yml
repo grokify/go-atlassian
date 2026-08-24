@@ -69,6 +69,7 @@ nav:
       - JQL Examples: guides/jql-examples.md
       - Troubleshooting: guides/troubleshooting.md
   - Releases:
+      - v0.33.0: releases/v0.33.0.md
       - v0.32.0: releases/v0.32.0.md
       - v0.31.0: releases/v0.31.0.md
       - v0.30.0: releases/v0.30.0.md
