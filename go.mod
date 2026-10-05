@@ -6,7 +6,7 @@ require (
 	github.com/andygrunwald/go-jira v1.17.0
 	github.com/grokify/goauth v0.24.0
 	github.com/grokify/gocharts/v2 v2.27.1
-	github.com/grokify/mogo v0.74.9
+	github.com/grokify/mogo v0.75.0
 	github.com/grokify/omniroadmap-core v0.1.0
 	github.com/jessevdk/go-flags v1.6.1
 	github.com/olekukonko/errors v1.3.0
@@ -37,7 +37,7 @@ require (
 	github.com/googleapis/enterprise-certificate-proxy v0.3.22 // indirect
 	github.com/googleapis/gax-go/v2 v2.24.1 // indirect
 	github.com/grokify/base36 v1.0.5 // indirect
-	github.com/huandu/xstrings v1.6.0 // indirect
+	github.com/huandu/xstrings v1.6.1 // indirect
 	github.com/inconshreveable/mousetrap v1.1.0 // indirect
 	github.com/kr/text v0.2.0 // indirect
 	github.com/mattn/go-colorable v0.1.15 // indirect
